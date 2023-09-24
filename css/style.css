@@ -1,13 +1,123 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-:root{
-    --gold : #F6DC3B;
-    --secondaly : #060620;
-    --main:#DADCEB;
-    --second-color:#060620;
-    --third:#10113C;
-    --background-color:#747898;
-};
+:root {
+  --gold: #9c8253  ;
+  --secondaly: #060620;
+  --main: #dadceb;
+  --second-color: #060620;
+  --third: #10113c;
+  --background-color: #747898;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+    background-color: var(--main);
+    font-family: "Cairo", sans-serif;
+    font-family: "Quicksand", sans-serif;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+h1 {
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+header {
+  padding: 5px 0;
+}
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  width: 100px;
+  margin-right: 20px;
+}
+.logo .brand-text p:first-child {
+  font-family: "Cairo", sans-serif;
+  font-family: "Dancing Script", cursive;
+  font-size: 45px;
+  color:var(--gold)
+}
+.logo .brand-text p:nth-child(2) {
+  color: #6B5E07;
+}
+.container .burger{
+    --after-content:'\f0c9';
+    color:white
+}
+.container .burger::after{
+    content: var(--after-content);
+    font-family:"Font Awesome 5 Free";
+    font-weight:900;
+    font-size:30px;
+    color: var(--gold);
+}
+.landing{
+    padding:20px 0
+}
+.landing .container{
+    height: 84.7vh;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 130px;
+}
+.landing .landing-text{
+    flex-basis: 50%
+}
+.landing .landing-text p:first-child{
+    font-family: "Cairo", sans-serif;
+    font-family: "Dancing Script", cursive;
+    font-size: 60px;
+    color: var(--gold);
+}
+.landing .landing-text p:nth-child(2){
+    position: relative;
+    top: -10px;
+    left: 35px;
+    color:var(--gold)
+}
+.landing img{
+    width:450px
+}
+.landing .landing-text p:nth-child(3){
+    line-height:1.8;
+    color:#58412B;
+    font-size:17px
+}
