@@ -1,9 +1,20 @@
-let burgerIcon = document.querySelector(".container .burger");
-window.onclick = function (e) {
-  if (e.target === burgerIcon) {
-    burgerIcon.style.setProperty("--after-content", "'\\58'");
-    
-  } else {
-    burgerIcon.style.setProperty("--after-content", "'\\f0c9'");
+let BurgerLinks = document.querySelector(".burger-links")
+
+BurgerLinks.addEventListener("click" , () =>{
+  BurgerLinks.classList.toggle("clicked")
+})
+let header = document.querySelector("header")
+
+let slideNav = document.querySelector(".slide-nav")
+
+BurgerLinks.addEventListener("click" , () =>{
+  if(BurgerLinks.classList.contains("clicked")){
+    slideNav.style.left = "5px" ;
+    header.classList.add("hoverd")
   }
-};
+  else{
+    slideNav.style.left = "-500px" 
+    header.classList.remove("hoverd")
+  }
+})
+

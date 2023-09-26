@@ -4,20 +4,22 @@
   box-sizing: border-box;
 }
 :root {
-  --gold: #9c8253  ;
+  --gold: #9c8253;
   --secondaly: #060620;
   --main: #dadceb;
   --second-color: #060620;
   --third: #10113c;
   --background-color: #747898;
+  /*
+*/
 }
 html {
   scroll-behavior: smooth;
 }
 body {
-    background-color: var(--main);
-    font-family: "Cairo", sans-serif;
-    font-family: "Quicksand", sans-serif;
+  font-family: "Cairo", sans-serif;
+  font-family: "Quicksand", sans-serif;
+  background-color: #5d5b59;
 }
 ul {
   list-style-type: none;
@@ -30,7 +32,6 @@ a {
   padding-right: 15px;
   margin-left: auto;
   margin-right: auto;
-
 }
 @media (min-width: 768px) {
   .container {
@@ -54,70 +55,145 @@ p {
   margin: 0;
 }
 header {
-  padding: 5px 0;
+  padding-top: 15px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
 }
 header .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.logo {
+header:hover,header.hoverd {
+  background-color: #fff;
+}
+header .container .nav-links {
   display: flex;
   align-items: center;
 }
-.logo img {
-  width: 100px;
-  margin-right: 20px;
+header .container .burger-links {
+  width: 30px;
+  height: 20.5px;
+  position: relative;
+  cursor: pointer;
 }
-.logo .brand-text p:first-child {
+header .container .burger-links span {
+  position: absolute;
+  background-color: white;
+  left: 0;
+  height: 1.5px;
+  width: 100%;
+  transition: 0.5s;
+  border-radius: 3px;
+}
+header .container span:first-child {
+  top: 0;
+}
+header .container span:nth-child(2) {
+  top: 10px;
+  height: 2.5px;
+}
+header .container span:last-child {
+  top: 20px;
+}
+header:hover .burger-links span,header.hoverd .burger-links span{
+  background-color: black;
+}
+.burger-links.clicked span:nth-child(2) {
+  opacity: 0;
+}
+.burger-links.clicked span:first-child,
+.burger-links.clicked span:last-child {
+  top: 9px;
+  color: rgb(178, 5, 5);
+}
+.burger-links.clicked span:first-child {
+  transform: rotate(45deg);
+}
+.burger-links.clicked span:last-child {
+  transform: rotate(-45deg);
+}
+header .container .links {
+  margin-left: 25px;
+}
+@media (max-width: 991px) {
+  header .container .links {
+    display: none;
+  }
+}
+header .container .links a {
+  color: white;
+  margin-left: 15px;
+  font-size: 16px;
+  letter-spacing: 2px;
+  transition: 0.5s;
+}
+header:hover .links a,header.hoverd .links a {
+  color: black;
+}
+header .container .links a:hover {
+  border-bottom: 0.5px solid black;
+}
+header .container .logo {
+  margin-left: -200px;
+}
+@media (max-width: 991px) {
+  header .container .logo {
+    margin-left: 0;
+  }
+}
+header:hover .logo #brand-name,header.hoverd .logo #brand-name{
+  color: black;
+}
+@media (max-width: 767px) {
+  .container .logo .brand-name {
+    font-size: 30px !important;
+  }
+}
+header:hover #brand-text,header.hoverd #brand-text{
+  color: black;
+}
+header .container .logo .brand-name {
   font-family: "Cairo", sans-serif;
   font-family: "Dancing Script", cursive;
-  font-size: 45px;
-  color:var(--gold)
+  font-size: 40px;
+  color: white;
 }
-.logo .brand-text p:nth-child(2) {
-  color: #6B5E07;
+header .container .logo span {
+  position: relative;
+  top: -11px;
+  color: white;
+  font-size: 12px;
+  right: -30px;
+  letter-spacing: 2px;
 }
-.container .burger{
-    --after-content:'\f0c9';
-    color:white
+@media (max-width: 767px) {
+  header .container .logo span {
+    font-size: 9px;
+    right: -15px;
+  }
 }
-.container .burger::after{
-    content: var(--after-content);
-    font-family:"Font Awesome 5 Free";
-    font-weight:900;
-    font-size:30px;
-    color: var(--gold);
+header .container .icons i {
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
 }
-.landing{
-    padding:20px 0
+header:hover .icons i,header.hoverd .icons i{
+  color: black;
 }
-.landing .container{
-    height: 84.7vh;
-    display: flex;
-    justify-content: space-between;
-    padding-top: 130px;
+.slide-nav {
+  position: absolute;
+  left: -500px;
+  top: 85px;
+  background-color: white;
+  width: 350px;
+  height: 696px;
+  transition: 0.5s;
+  border-radius: 6px;
 }
-.landing .landing-text{
-    flex-basis: 50%
-}
-.landing .landing-text p:first-child{
-    font-family: "Cairo", sans-serif;
-    font-family: "Dancing Script", cursive;
-    font-size: 60px;
-    color: var(--gold);
-}
-.landing .landing-text p:nth-child(2){
-    position: relative;
-    top: -10px;
-    left: 35px;
-    color:var(--gold)
-}
-.landing img{
-    width:450px
-}
-.landing .landing-text p:nth-child(3){
-    line-height:1.8;
-    color:#58412B;
-    font-size:17px
+@media (max-width: 767px) {
+  .slide-nav {
+    width: 100%;
+  }
 }
