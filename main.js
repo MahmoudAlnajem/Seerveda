@@ -1,3 +1,5 @@
+// start slide nav 
+
 let BurgerLinks = document.querySelector(".burger-links");
 
 BurgerLinks.addEventListener("click", () => {
@@ -16,6 +18,8 @@ BurgerLinks.addEventListener("click", () => {
     header.classList.remove("hoverd");
   }
 });
+
+// end slide nav 
 
 // start image slider
 

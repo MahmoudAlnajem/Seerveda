@@ -18,6 +18,7 @@ html {
 }
 body {
   font-family: 'Abel', sans-serif;
+  background-color: #15a2f9;
 }
 ul {
   list-style-type: none;
@@ -193,7 +194,7 @@ header:hover .icons i,header.hoverd .icons i{
   padding: 20px;
   z-index: 999;
 }
-@media (max-width: 767px) {
+@media (max-width: 400px) {
   .slide-nav {
     width: 100%;
   }
@@ -247,6 +248,11 @@ header:hover .icons i,header.hoverd .icons i{
   height:100%;
   position:relative
 }
+@media(max-width:767px){
+  .landing-sec .image-container{
+    display: none;
+  }
+}
 .landing-sec .image-container img{
   position:absolute;
   width:100%;
@@ -265,6 +271,11 @@ header:hover .icons i,header.hoverd .icons i{
   font-size:30px;
   cursor: pointer;
 }
+@media(max-width:767px){
+  .navigation-angles i{
+    display:none
+  }
+}
 .navigation-angles i:first-child{
   right:30px;
 }
@@ -276,9 +287,15 @@ header:hover .icons i,header.hoverd .icons i{
   color: #eee;
 }
 .images-polits {
-  position:absolute;
-  bottom:70px;
-  left:50%;
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media(max-width:767px){
+  .images-polits{
+    display: none;
+  }
 }
 .images-polits ul{
   display: flex;
@@ -289,6 +306,7 @@ header:hover .icons i,header.hoverd .icons i{
   border: white 1px solid ;
   height:15px;
   width:15px;
+  transition:0.5s ease
 }
 .images-polits ul li.active{
   background-color: rgb(8, 168, 255);
