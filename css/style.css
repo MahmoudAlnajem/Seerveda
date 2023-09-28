@@ -18,7 +18,7 @@ html {
 }
 body {
   font-family: "Abel", sans-serif;
-  background-color: #15a2f9;
+  background-color: #baafaf
 }
 ul {
   list-style-type: none;
@@ -64,20 +64,33 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 header:hover,
 header.hoverd {
   background-color: #fff;
 }
-header .container .nav-links {
-  display: flex;
-  align-items: center;
+header .container .logo-image img {
+  width:70px;
+  aspect-ratio: 1/1;
+}
+@media(max-width:767px){
+  header .container .logo-image img {
+    width: 50px;
+    aspect-ratio: 1/1;
+  }
 }
 header .container .burger-links {
   width: 30px;
   height: 20.5px;
-  position: relative;
+  position: absolute;
   cursor: pointer;
+  right: 50px;
+}
+@media(max-width:767px){
+  header .container .burger-links {
+    right: 20px;
+  }
 }
 header .container .burger-links span {
   position: absolute;
@@ -125,10 +138,6 @@ header .container .logo {
     margin-left: 0;
   }
 }
-header .container .logo img {
-  width: 100px;
-  aspect-ratio: 1/1;
-}
 
 header .container .logo .brand-name {
   font-family: "Cairo", sans-serif;
@@ -144,6 +153,7 @@ header.hoverd .logo #brand-name {
 @media (max-width: 767px) {
   .container .logo .brand-name {
     font-size: 30px !important;
+    margin-left:-30px;
   }
 }
 header:hover #brand-text,
@@ -161,7 +171,7 @@ header .container .logo span {
 @media (max-width: 767px) {
   header .container .logo span {
     font-size: 9px;
-    right: -15px;
+    right: 20px;
   }
 }
 header .container .icons i {
@@ -169,10 +179,16 @@ header .container .icons i {
   font-size: 22px;
   cursor: pointer;
 }
+@media(max-width:767px){
+  header .container .icons i {
+    display: none;
+  }
+}
 header:hover .icons i,
 header.hoverd .icons i {
   color: black;
 }
+
 header .links {
   border-top: 2px solid #f6f6f67a ;
   display: flex;
