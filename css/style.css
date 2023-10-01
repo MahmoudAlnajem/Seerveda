@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +12,11 @@
   --second-color: #060620;
   --third: #10113c;
   --background-color: #747898;
+  --font: 'Poppins', sans-serif;
+
+  /* COLORS */
+  --color: #9176FF;
+  --bg-color: #f4f4f4;
   /*
 */
 }
@@ -18,7 +25,8 @@ html {
 }
 body {
   font-family: "Abel", sans-serif;
-  background-color: #baafaf
+  background-color: #baafaf;
+
 }
 ul {
   list-style-type: none;
@@ -26,6 +34,9 @@ ul {
 a {
   text-decoration: none;
 }
+/* start component */
+
+/* end component */
 .container {
   padding-left: 15px;
   padding-right: 15px;
@@ -71,10 +82,10 @@ header.hoverd {
   background-color: #fff;
 }
 header .container .logo-image img {
-  width:70px;
+  width: 70px;
   aspect-ratio: 1/1;
 }
-@media(max-width:767px){
+@media (max-width: 767px) {
   header .container .logo-image img {
     width: 50px;
     aspect-ratio: 1/1;
@@ -87,7 +98,7 @@ header .container .burger-links {
   cursor: pointer;
   right: 50px;
 }
-@media(max-width:767px){
+@media (max-width: 767px) {
   header .container .burger-links {
     right: 20px;
   }
@@ -153,7 +164,7 @@ header.hoverd .logo #brand-name {
 @media (max-width: 767px) {
   .container .logo .brand-name {
     font-size: 30px !important;
-    margin-left:-30px;
+    margin-left: -30px;
   }
 }
 header:hover #brand-text,
@@ -163,7 +174,7 @@ header.hoverd #brand-text {
 header .container .logo span {
   position: relative;
   top: -11px;
-  color: #FFDEAD;
+  color: #ffdead;
   font-size: 12px;
   right: -30px;
   letter-spacing: 2px;
@@ -179,7 +190,7 @@ header .container .icons i {
   font-size: 22px;
   cursor: pointer;
 }
-@media(max-width:767px){
+@media (max-width: 767px) {
   header .container .icons i {
     display: none;
   }
@@ -190,7 +201,7 @@ header.hoverd .icons i {
 }
 
 header .links {
-  border-top: 2px solid #f6f6f67a ;
+  border-top: 2px solid #f6f6f67a;
   display: flex;
   justify-content: center;
   padding: 15px 0;
@@ -346,6 +357,102 @@ header .links a:hover {
 .images-polits ul li.active {
   background-color: rgb(8, 168, 255);
 }
+
+/* start managment section */
+.swiper{
+  width: 100%;
+  height: 600px;
+  background-color: #EEE;
+  display: flex;
+  align-items: center;
+}
+
+.swiper-wrapper{
+  width: 100%;
+  height: 35em;
+  display: flex;
+  align-items: center;
+}
+
+.card{
+  width: 20em;
+  height: 90%;
+  background-color: #fff;
+  border-radius: 2em;
+  box-shadow: 0 0 2em rgba(0, 0, 0, .2);
+  padding: 2em 1em;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  margin: 0 2em;
+}
+
+.swiper-slide:not(.swiper-slide-active){
+  filter: blur(1px);
+}
+.card__image {
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  border: 5px solid var(--color);
+  padding: 3px;
+  margin-bottom: 2em;
+}
+
+.card__image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card__content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card__title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  position: relative;
+  top: 0.2em;
+  font-family: var(--font);
+  margin-bottom: 20px;
+}
+
+.card__name {
+  color: var(--color);
+  font-family: var(--font);
+}
+
+.card__text {
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 1em 0;
+  font-family: var(--font);
+  line-height: 1.6;
+}
+.card__phone{
+  margin-bottom: 10px;
+}
+.card__btn {
+  background-color: var(--color);
+  color: #fff;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: none;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  margin-top: 0.5em;
+  cursor: pointer;
+  font-family: var(--font);
+  margin-top:20px;
+}
+/* end managment section */
 
 /* start animations */
 @keyframes move-right {
