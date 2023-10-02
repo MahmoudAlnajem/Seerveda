@@ -229,8 +229,7 @@ header .links a:hover {
   border-bottom: 0.5px solid black;
 }
 .slide-nav {
-  position: absolute;
-  left: -500px;
+  position: fixed;
   top: 85px;
   background-color: white;
   width: 350px;
