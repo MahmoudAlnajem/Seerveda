@@ -1,0 +1,36 @@
+{
+    "management": [
+        {
+            "image":"images/1.png",
+            "title":"Web Designer",
+            "name":"Mahmoud Alnajem",
+            "text":"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum",
+            "phone":"+963953580434",
+            "email":"alnjm7023@gmail.com"
+        },
+        {
+            "image":"images/2.png",
+            "title":"UI/UX Devloper",
+            "name":"Khaled Kanbargi",
+            "text":"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum",
+            "phone":"+963953580434",
+            "email":"alnjm7023@gmail.com"
+        },
+        {
+            "image":"images/3.png",
+            "title":"Front End developer",
+            "name":"Mahmoud Alnajem",
+            "text":"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum",
+            "phone":"+963953580434",
+            "email":"alnjm7023@gmail.com"
+        },
+        {
+            "image":"images/4.png",
+            "title":"Back End Developer",
+            "name":"Mahmoud Alnajem",
+            "text":"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit veritatis labore provident non tempora odio est sunt, ipsum",
+            "phone":"+963953580434",
+            "email":"alnjm7023@gmail.com"
+        }
+    ]
+}

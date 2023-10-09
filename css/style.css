@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -10,15 +11,15 @@
   --second-color: #060620;
   --third: #10113c;
   --background-color: #747898;
-  /*
-*/
+  --color: #9176FF;
+  --font: 'Poppins', sans-serif;
 }
 html {
   scroll-behavior: smooth;
 }
 body {
   font-family: "Abel", sans-serif;
-  background-color: #baafaf
+  background-color: #baafaf;
 }
 ul {
   list-style-type: none;
@@ -71,7 +72,7 @@ header .container {
 }
 header:hover,
 header.hoverd {
-background-color: var(--third);
+  background-color: var(--third);
 }
 header .container .logo-image img {
   width: 150px;
@@ -82,25 +83,25 @@ header .container .logo-image img {
   letter-spacing: 2px;
   color: #ffdead;
 }
-@media(max-width:767px){
+@media (max-width: 767px) {
   header .container .logo-image img {
     width: 100px;
     right: -100px !important;
   }
 }
-@media(min-width:990px) and (max-width:1200px){
+@media (min-width: 990px) and (max-width: 1200px) {
   header .container .logo-image img {
     width: 150px;
     right: -190px !important;
   }
 }
-@media(max-width:990px) {
+@media (max-width: 990px) {
   header .container .logo-image img {
     width: 150px;
     right: -130px !important;
   }
 }
-@media (max-width:740px) {
+@media (max-width: 740px) {
   header .container .logo-image img {
     width: 150px;
     right: -90px !important;
@@ -114,7 +115,7 @@ header .container .burger-links {
   cursor: pointer;
   right: 20px;
 }
-@media(max-width:767px){
+@media (max-width: 767px) {
   header .container .burger-links {
     right: 20px;
     top: 15px;
@@ -146,14 +147,13 @@ header.hoverd .burger-links span {
 .burger-links.clicked span:nth-child(2) {
   opacity: 0;
 }
- .burger-links.clicked span:first-child,
- .burger-links.clicked span:last-child {
+.burger-links.clicked span:first-child,
+.burger-links.clicked span:last-child {
   top: 9px;
 }
 .burger-links.clicked span:first-child {
   transform: rotate(45deg);
   background-color: white;
- 
 }
 .burger-links.clicked span:last-child {
   transform: rotate(-45deg);
@@ -215,7 +215,7 @@ header .container .icons i {
   position: relative;
   right: 60px;
 }
-@media(max-width:767px){
+@media (max-width: 767px) {
   header .container .icons i {
     display: none;
   }
@@ -312,7 +312,7 @@ header .links a:hover {
 
 .landing-sec {
   width: 100%;
-  height: 110vh;
+  height: 100vh;
   position: relative;
 }
 .landing-sec .image-container {
@@ -383,6 +383,101 @@ header .links a:hover {
 .images-polits ul li.active {
   background-color: rgb(8, 168, 255);
 }
+/* start managment section */
+.swiper {
+  width: 100%;
+  height: 600px;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+}
+
+.swiper-wrapper {
+  width: 100%;
+  height: 35em;
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  width: 20em;
+  height: 90%;
+  background-color: #fff;
+  border-radius: 2em;
+  box-shadow: 0 0 2em rgba(0, 0, 0, 0.2);
+  padding: 2em 1em;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  margin: 0 2em;
+}
+
+.swiper-slide:not(.swiper-slide-active) {
+  filter: blur(1px);
+}
+.card__image {
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  border: 5px solid var(--color);
+  padding: 3px;
+  margin-bottom: 2em;
+}
+
+.card__image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card__content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card__title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  position: relative;
+  top: 0.2em;
+  font-family: var(--font);
+  margin-bottom: 20px;
+}
+
+.card__name {
+  color: var(--color);
+  font-family: var(--font);
+}
+
+.card__text {
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 1em 0;
+  font-family: var(--font);
+  line-height: 1.6;
+}
+.card__phone {
+  margin-bottom: 10px;
+}
+.card__btn {
+  background-color: var(--color);
+  color: #fff;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: none;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  margin-top: 0.5em;
+  cursor: pointer;
+  font-family: var(--font);
+  margin-top: 20px;
+}
+/* end managment section */
 
 /* start animations */
 @keyframes move-right {
@@ -393,23 +488,23 @@ header .links a:hover {
 }
 
 /* end animations */
-@media (max-width : 600px){
+@media (max-width: 600px) {
   .container .logo .brand-name {
     font-size: 40px !important;
     margin-left: -10px;
     margin-bottom: 10px;
     margin-top: -10px;
-}
-header .container .logo span {
-  font-size: 15px;
-  right: 25px;
-}
-header .container .logo-image img {
-  width: 90px;
-  right: 0 !important;
-}
-header .container .burger-links {
-  right: 20px;
-  top: 15px;
-}
+  }
+  header .container .logo span {
+    font-size: 15px;
+    right: 25px;
+  }
+  header .container .logo-image img {
+    width: 90px;
+    right: 0 !important;
+  }
+  header .container .burger-links {
+    right: 20px;
+    top: 15px;
+  }
 }
