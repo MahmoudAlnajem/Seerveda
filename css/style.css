@@ -339,7 +339,7 @@ header .links a:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-70%);
-  color: white;
+  color: rgb(8, 168, 255);
   font-size: 30px;
   cursor: pointer;
 }
@@ -360,7 +360,7 @@ header .links a:hover {
 }
 .images-polits {
   position: absolute;
-  bottom: 70px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -375,7 +375,7 @@ header .links a:hover {
 }
 .images-polits ul li {
   border-radius: 50%;
-  border: white 1px solid;
+  border: rgb(8, 168, 255) 1px solid;
   height: 15px;
   width: 15px;
   transition: 0.5s ease;

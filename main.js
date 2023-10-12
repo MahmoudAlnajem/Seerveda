@@ -25,6 +25,14 @@ BurgerLinks.addEventListener("click", () => {
 
 let imagesArr = document.querySelectorAll(".landing-sec .image-container img");
 
+
+let politsContainer = document.querySelector(".images-polits ul");
+
+for(i=0; i<imagesArr.length;i++){
+  let liPolit = document.createElement("li")
+  politsContainer.appendChild(liPolit)
+}
+
 let bulletsArr = document.querySelectorAll(".images-polits ul li");
 
 let current = 0;
