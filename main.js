@@ -186,7 +186,7 @@ async function generateCardsDependsOnRespnse() {
 
     cardEmail.classList.add("card__email");
 
-    cardEmail.innerHTML = `Email: ${val.phone}`;
+    cardEmail.innerHTML = `Email: ${val.email}`;
 
     cardContent.appendChild(cardEmail);
 

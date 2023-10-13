@@ -315,15 +315,15 @@ header .links a:hover {
   height: 100vh;
   position: relative;
 }
+@media (max-width: 767px) {
+  .landing-sec {
+    height: 80vh;
+  }
+}
 .landing-sec .image-container {
   width: 100%;
   height: 100%;
   position: relative;
-}
-@media (max-width: 767px) {
-  .landing-sec .image-container {
-    display: none;
-  }
 }
 .landing-sec .image-container img {
   position: absolute;
@@ -342,12 +342,18 @@ header .links a:hover {
   color: rgb(8, 168, 255);
   font-size: 30px;
   cursor: pointer;
+  opacity: 0.4;
+  transition:0.3s
 }
-@media (max-width: 767px) {
+.navigation-angles i:hover{
+  opacity: 1;
+  box-shadow: rgb(8, 168, 255) 5px 5px 6px 1px ;
+}
+/* @media (max-width: 767px) {
   .navigation-angles i {
     display: none;
   }
-}
+} */
 .navigation-angles i:first-child {
   right: 30px;
 }
