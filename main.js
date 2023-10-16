@@ -102,8 +102,8 @@ function removeAll() {
 
 // start managment section
 
-async function generateCardsDependsOnRespnse() {
-  let response = await fetch("jsonFiles/managment.json")
+async function generatemanagmentCardsDependsOnRespnse() {
+  let response = await fetch("jsonFiles/all.json")
     .then((r) => {
       let answer = r.json();
       return answer;
@@ -203,4 +203,98 @@ async function generateCardsDependsOnRespnse() {
     card.appendChild(cardContent);
   }
 }
-generateCardsDependsOnRespnse();
+generatemanagmentCardsDependsOnRespnse();
+
+
+
+// start product section  
+
+async function generateproductsCardsDependsOnRespnse() {
+  let response = await fetch("jsonFiles/all.json")
+  .then((r) => {
+    let res = r.json()
+    return res
+  })
+  .then((r) => {
+    return r["products"]
+  })
+  for(val of response){
+
+    let cardsConatiner = document.querySelector(".cards")
+
+    let card = document.createElement("div")
+
+    card.classList.add("product-card")
+
+
+    // start product image 
+
+
+    let productImagecon = document.createElement("div")
+    
+    productImagecon.classList.add("product-image")
+
+    card.appendChild(productImagecon)
+
+    let productImage = document.createElement("img")
+
+    productImage.setAttribute("src",val.image)
+
+    productImagecon.appendChild(productImage)  
+
+
+    // start product name or title 
+
+
+    let productName = document.createElement("div")
+
+    productName.classList.add("product-name")
+
+    card.appendChild(productName)
+
+    let productNameText = document.createElement("h3")
+
+    productNameText.innerHTML = val.title
+
+    productName.appendChild(productNameText)
+
+    // start product text 
+
+    let productDes= document.createElement("div")
+
+    productDes.classList.add("product-text")
+
+    productDes.textContent = val.des
+
+    card.appendChild(productDes)
+
+
+    // start product button 
+
+    let viewMoreButton = document.createElement("button")
+
+    viewMoreButton.textContent = `VIEW MORE`
+
+    card.appendChild(viewMoreButton)
+
+    // start new span 
+
+    let newSpan =document.createElement("span")
+
+    newSpan.classList.add("new")
+
+    newSpan.style.padding = "7px"
+
+    newSpan.textContent = `NEW`
+
+    if(val.new === true ){
+      card.appendChild(newSpan)    
+    }
+   
+
+    // append card to cards container
+    cardsConatiner.appendChild(card)
+  }
+}
+generateproductsCardsDependsOnRespnse() 
+// end product section  

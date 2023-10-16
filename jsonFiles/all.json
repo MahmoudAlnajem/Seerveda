@@ -32,5 +32,43 @@
             "phone":"+963953580434",
             "email":"alnjm7023@gmail.com"
         }
+    ],
+    "products": [
+        {
+            "image": "images/1.png",
+            "title": "Gluta Veda",
+            "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "new":false 
+        },
+        {
+            "image": "images/2.png",
+            "title": "Gluta Veda",
+            "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "new":true 
+        },
+        {
+            "image": "images/3.png",
+            "title": "Gluta Veda",
+            "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "new":false 
+        },
+        {
+            "image": "images/4.png",
+            "title": "Gluta Veda",
+            "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
+            "new":false 
+        },
+        {
+            "image": "images/5.png",
+            "title": "Gluta Veda",
+            "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "new":true 
+        },
+        {
+            "image": "images/6.png",
+            "title": "Gluta Veda",
+            "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "new":true 
+        }
     ]
 }

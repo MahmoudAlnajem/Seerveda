@@ -427,7 +427,7 @@ header .links a:hover {
   width: 10em;
   height: 10em;
   border-radius: 50%;
-  border: 5px solid var(--color);
+  border: 5px solid #f2b863;
   padding: 3px;
   margin-bottom: 2em;
 }
@@ -455,7 +455,7 @@ header .links a:hover {
 }
 
 .card__name {
-  color: var(--color);
+  color: #f2b863;
   font-family: var(--font);
 }
 
@@ -470,7 +470,7 @@ header .links a:hover {
   margin-bottom: 10px;
 }
 .card__btn {
-  background-color: var(--color);
+  background-color: #f2b863;
   color: #fff;
   font-size: 1rem;
   text-transform: uppercase;
@@ -484,6 +484,105 @@ header .links a:hover {
   margin-top: 20px;
 }
 /* end managment section */
+
+/* start poduct section  */
+
+.product {
+  min-height: 600px;
+  background-color: #dadceb;
+  padding: 70px 0 ;
+}
+.section-title{
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+.section-title ul {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0 40px;
+}
+.section-title li {
+  border-radius: 15px;
+  padding: 10px;
+  transition:.3s;
+  cursor: pointer;
+}
+.section-title li:hover {
+  background-color: #f2b863;
+}
+.section-title li.active{
+  background-color: #f2b863;
+}
+.section-title li a{
+  color: #f2b863;
+  font-size: 17px;
+  transition:.3s;
+}
+.section-title li:hover a{
+  color:white ;
+}
+.section-title li.active a{
+  color:white ;
+}
+
+
+.cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap:40px;
+}
+.product-card{
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #eee;
+  position: relative;
+  min-height: 320px;
+  transition:0.5s;
+}
+
+.product-card:hover{
+  transform: scale(1.08);
+  box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 25px 2px;
+}
+.product-image img{
+  width: 100%;
+}
+.product-name h3{
+  margin: 15px 0 0;
+  text-align: center;
+}
+.product-text{
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+.product-card button{
+  margin-bottom: 20px;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: #f2b863;
+  border: none;
+  color: white;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 50%;
+}
+.product-card .new {
+  background-color:rgba(44, 191, 232);
+  color:white;
+  border-radius:10px;
+  position:absolute;
+  right:10px;
+  top:5px;
+  transition:0.5s;
+}
+.product-card:hover .new{
+  background-color:rgba(232, 44, 119);
+}
+/* end poduct section  */
+
 
 /* start animations */
 @keyframes move-right {
