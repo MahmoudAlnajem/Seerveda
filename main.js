@@ -208,6 +208,7 @@ generatemanagmentCardsDependsOnRespnse();
 
 
 // start product section  
+let cards = [];
 
 async function generateproductsCardsDependsOnRespnse() {
   let response = await fetch("jsonFiles/all.json")
@@ -226,6 +227,7 @@ async function generateproductsCardsDependsOnRespnse() {
 
     card.classList.add("product-card")
 
+    card.classList.add("all")
 
     // start product image 
 
@@ -288,13 +290,46 @@ async function generateproductsCardsDependsOnRespnse() {
     newSpan.textContent = `NEW`
 
     if(val.new === true ){
-      card.appendChild(newSpan)    
+      card.appendChild(newSpan)  
+
+      card.classList.add("new")  
     }
    
 
     // append card to cards container
     cardsConatiner.appendChild(card)
+
+    cards.push(card)
   }
 }
 generateproductsCardsDependsOnRespnse() 
+
+
+// start working on products filtr depend on lis 
+
+let productLis= document.querySelectorAll(".product ul li")
+
+productLis.forEach((li) => {
+
+  li.addEventListener("click",() =>{
+
+    productLis.forEach((el) => {
+
+      el.classList.remove("active")
+
+    })
+    li.classList.add("active")
+    
+
+    cards.forEach((card) => {
+
+      card.style.display = 'none'
+      
+    })
+
+    document.querySelectorAll(li.dataset.cat).forEach((e)=> e.style.display = 'block')
+
+  })
+})
+
 // end product section  
