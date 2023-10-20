@@ -25,12 +25,11 @@ BurgerLinks.addEventListener("click", () => {
 
 let imagesArr = document.querySelectorAll(".landing-sec .image-container img");
 
-
 let politsContainer = document.querySelector(".images-polits ul");
 
-for(i=0; i<imagesArr.length;i++){
-  let liPolit = document.createElement("li")
-  politsContainer.appendChild(liPolit)
+for (i = 0; i < imagesArr.length; i++) {
+  let liPolit = document.createElement("li");
+  politsContainer.appendChild(liPolit);
 }
 
 let bulletsArr = document.querySelectorAll(".images-polits ul li");
@@ -59,7 +58,7 @@ function set() {
 
 set();
 
-nextbutton.onclick = function () {
+nextbutton.onclick = function() {
   clearInterval(first);
   current++;
   if (current === imagesArr.length) {
@@ -73,7 +72,7 @@ nextbutton.onclick = function () {
   set();
 };
 
-prevbutton.onclick = function () {
+prevbutton.onclick = function() {
   clearInterval(first);
   current--;
   if (current < 0) {
@@ -89,11 +88,11 @@ prevbutton.onclick = function () {
 // ***********************************
 
 function removeAll() {
-  imagesArr.forEach((img) => {
+  imagesArr.forEach(img => {
     img.classList.remove("active");
   });
 
-  bulletsArr.forEach((p) => {
+  bulletsArr.forEach(p => {
     p.classList.remove("active");
   });
 }
@@ -104,11 +103,11 @@ function removeAll() {
 
 async function generatemanagmentCardsDependsOnRespnse() {
   let response = await fetch("jsonFiles/all.json")
-    .then((r) => {
+    .then(r => {
       let answer = r.json();
       return answer;
     })
-    .then((r) => r["management"]);
+    .then(r => r["management"]);
 
   for (val of response) {
     let swiperWrapper = document.querySelector(".swiper-wrapper");
@@ -205,131 +204,427 @@ async function generatemanagmentCardsDependsOnRespnse() {
 }
 generatemanagmentCardsDependsOnRespnse();
 
-
-
-// start product section  
+// start product section
 let cards = [];
 
 async function generateproductsCardsDependsOnRespnse() {
   let response = await fetch("jsonFiles/all.json")
-  .then((r) => {
-    let res = r.json()
-    return res
-  })
-  .then((r) => {
-    return r["products"]
-  })
-  for(val of response){
+    .then(r => {
+      let res = r.json();
+      return res;
+    })
+    .then(r => {
+      return r["products"];
+    });
+  for (val of response) {
+    let cardsConatiner = document.querySelector(".cards");
 
-    let cardsConatiner = document.querySelector(".cards")
+    let card = document.createElement("div");
 
-    let card = document.createElement("div")
+    card.classList.add("product-card");
 
-    card.classList.add("product-card")
+    card.classList.add("all");
 
-    card.classList.add("all")
+    // start product image
 
-    // start product image 
+    let productImagecon = document.createElement("div");
 
+    productImagecon.classList.add("product-image");
 
-    let productImagecon = document.createElement("div")
-    
-    productImagecon.classList.add("product-image")
+    card.appendChild(productImagecon);
 
-    card.appendChild(productImagecon)
+    let productImage = document.createElement("img");
 
-    let productImage = document.createElement("img")
+    productImage.setAttribute("src", val.image);
 
-    productImage.setAttribute("src",val.image)
+    productImagecon.appendChild(productImage);
 
-    productImagecon.appendChild(productImage)  
+    // start product name or title
 
+    let productName = document.createElement("div");
 
-    // start product name or title 
+    productName.classList.add("product-name");
 
+    card.appendChild(productName);
 
-    let productName = document.createElement("div")
+    let productNameText = document.createElement("h3");
 
-    productName.classList.add("product-name")
+    productNameText.innerHTML = val.title;
 
-    card.appendChild(productName)
+    productName.appendChild(productNameText);
 
-    let productNameText = document.createElement("h3")
+    // start product text
 
-    productNameText.innerHTML = val.title
+    let productDes = document.createElement("div");
 
-    productName.appendChild(productNameText)
+    productDes.classList.add("product-text");
 
-    // start product text 
+    productDes.textContent = val.des;
 
-    let productDes= document.createElement("div")
+    card.appendChild(productDes);
 
-    productDes.classList.add("product-text")
+    // start product button
 
-    productDes.textContent = val.des
+    let viewMoreButton = document.createElement("button");
 
-    card.appendChild(productDes)
+    viewMoreButton.textContent = `VIEW MORE`;
 
+    card.appendChild(viewMoreButton);
 
-    // start product button 
+    // start new span
 
-    let viewMoreButton = document.createElement("button")
+    if (val.new === true) {
+      let newSpan = document.createElement("span");
 
-    viewMoreButton.textContent = `VIEW MORE`
+      newSpan.classList.add("new");
 
-    card.appendChild(viewMoreButton)
+      newSpan.style.padding = "7px";
 
-    // start new span 
+      newSpan.textContent = `NEW`;
 
-    let newSpan =document.createElement("span")
+      card.appendChild(newSpan);
 
-    newSpan.classList.add("new")
-
-    newSpan.style.padding = "7px"
-
-    newSpan.textContent = `NEW`
-
-    if(val.new === true ){
-      card.appendChild(newSpan)  
-
-      card.classList.add("new")  
+      card.classList.add("new");
     }
-   
 
     // append card to cards container
-    cardsConatiner.appendChild(card)
+    cardsConatiner.appendChild(card);
 
-    cards.push(card)
+    cards.push(card);
   }
 }
-generateproductsCardsDependsOnRespnse() 
+generateproductsCardsDependsOnRespnse();
 
+// start working on products filtr depend on lis
 
-// start working on products filtr depend on lis 
+let productLis = document.querySelectorAll(".product ul li");
 
-let productLis= document.querySelectorAll(".product ul li")
+productLis.forEach(li => {
+  li.addEventListener("click", () => {
+    productLis.forEach(el => {
+      el.classList.remove("active");
+    });
+    li.classList.add("active");
 
-productLis.forEach((li) => {
+    cards.forEach(card => {
+      card.style.display = "none";
+    });
 
-  li.addEventListener("click",() =>{
+    document
+      .querySelectorAll(li.dataset.cat)
+      .forEach(e => (e.style.display = "block"));
+  });
+});
 
-    productLis.forEach((el) => {
+// end product section
+//start old events section
+/*selecting */
+let eventCard = document.querySelectorAll(".eventCard");
+let eventHeader = document.querySelector(".left-sid-cont h1");
+let eventParagraph = document.querySelector(".left-sid-cont p");
+let linkEvent = document.querySelector(".left-sid-cont button a");
+let cardCont = document.querySelector(".cards-container");
+let evenTdotsCont = document.querySelector(".cards-container .spans");
+let smallEventArr = [];
+let beforButton = document.querySelector(".spans #befor");
+let afterbutton = document.querySelector(".spans #after");
+let eventMainCont = document.querySelector(".Events-cont");
+let addAncherTobutton = document.querySelectorAll(
+  ".eventCard div:nth-child(2) button"
+);
 
-      el.classList.remove("active")
+/*functions */
+let resetClick = () => {
+  let card = document.querySelectorAll(".cards-container .eventCard");
+  Array.from(card).forEach(ele => {
+    console.log();
+    ele.children[0].classList.contains("clicked")
+      ? ele.children[0].classList.remove("clicked")
+      : ele;
+  });
+};
+/*control center:function make the controles (< / >) and generate the card function */
+let controlCenter = (num, arr) => {
+  let viewBort = 0;
+  if (num === 0) {
+    makeCard(arr);
+  }
+  afterbutton.addEventListener("click", () => {
+    let Allcards = document.querySelector(".cards-container .small-cont")
+      .children;
+    viewBort -= 320;
+    console.log(-320 * Math.floor(arr.length / 3));
+    if (viewBort === -320 * Math.floor(arr.length / 3.1) - 320) {
+      viewBort = 0;
+      let usedStyle = `translateY(${viewBort}%)`;
+      Array.from(Allcards).forEach(ele => {
+        ele.style.transform = usedStyle;
+      });
+    }
 
+    console.log(viewBort);
+    let usedStyle = `translateY(${viewBort}%)`;
+    Array.from(Allcards).forEach(ele => {
+      ele.style.transform = usedStyle;
+    });
+  });
+  beforButton.addEventListener("click", () => {
+    let Allcards = document.querySelector(".cards-container .small-cont")
+      .children;
+    if (viewBort === 0) {
+      viewBort = -320 * Math.floor(arr.length / 3.1);
+      let usedStyle = `translateY(${viewBort}%)`;
+      Array.from(Allcards).forEach(ele => {
+        ele.style.transform = usedStyle;
+      });
+    } else {
+      viewBort += 320;
+    }
+    let usedStyle = `translateY(${viewBort}%)`;
+    console.log(viewBort);
+
+    Array.from(Allcards).forEach(ele => {
+      ele.style.transform = usedStyle;
+    });
+  });
+};
+/*control center end */
+/*card maker start */
+let makeCard = arr => {
+  document.querySelector(".cards-container .small-cont").remove();
+  let evenTcontDiv = document.createElement("div");
+  evenTcontDiv.classList.add("small-cont");
+  for (let eventCounter = 0; eventCounter < arr.length; eventCounter++) {
+    let cardDiv = document.createElement("div");
+    cardDiv.classList.add("eventCard");
+    cardDiv.dataset.num = eventCounter;
+    /*start old-date html*/
+    let date = arr[eventCounter].date.split(" ");
+    let dateDiv = document.createElement("div");
+    dateDiv.classList.add("old-date");
+    let day = document.createElement("h1");
+    day.classList.add("day");
+    day.appendChild(document.createTextNode(date[0]));
+    let mounth = document.createElement("p");
+    mounth.appendChild(document.createTextNode(date[1]));
+    mounth.classList.add("mounth");
+    dateDiv.appendChild(day);
+    dateDiv.appendChild(mounth);
+    cardDiv.appendChild(dateDiv);
+    /*end old-date html*/
+    /*start info html*/
+    let secondDiv = document.createElement("div");
+    let title = document.createElement("h1");
+    title.classList.add("title");
+    title.append(document.createTextNode(arr[eventCounter].title));
+    let eventText = document.createElement("P");
+    eventText.classList.add("event-text");
+    eventText.appendChild(
+      document.createTextNode(arr[eventCounter]["short-desc"])
+    );
+    let eventButton = document.createElement("button");
+
+    let buttonAn = document.createElement("a");
+    buttonAn.href = "#desc";
+    buttonAn.append(document.createTextNode("show more"));
+    eventButton.append(buttonAn);
+    /*button click function start*/
+    eventButton.addEventListener("click", () => {
+      resetClick();
+      eventHeader.innerHTML = arr[eventCounter].title;
+      eventParagraph.innerHTML = arr[eventCounter].desc;
+      linkEvent.href = arr[eventCounter].link;
+      dateDiv.classList.add("clicked");
+    });
+
+    /*button click function end */
+    secondDiv.appendChild(title);
+    secondDiv.appendChild(eventText);
+    secondDiv.appendChild(eventButton);
+    cardDiv.appendChild(secondDiv);
+    /*end info html*/
+    evenTcontDiv.append(cardDiv);
+    cardCont.append(evenTcontDiv);
+    if (eventCounter === 0) {
+      eventButton.click();
+    }
+  }
+};
+/*card maker end */
+
+/*select maker start */
+let selectAndButtonMaker = arr => {
+  let select = document.createElement("select");
+  select.name = "Speizelation";
+  select.classList.add("select");
+  let selectButton = document.createElement("button");
+  selectButton.classList.add("selectButton");
+  selectButton.innerText = "Filter Events";
+  let select2 = document.createElement("select");
+  select2.name = "year";
+  select2.classList.add("select2");
+  let selectCont = document.createElement("div");
+  selectCont.append(select);
+  selectCont.append(select2);
+  selectCont.append(selectButton);
+  selectCont.classList.add("selectCont");
+  cardCont.prepend(selectCont);
+};
+/*select maker end */
+/*option maker */
+let spezOptionMaker = set => {
+  let selectQuer = document.querySelector("select.select");
+  for (let i = 0; i < set.size; i++) {
+    let optionCont = document.createElement("option");
+    optionCont.value = Array.from(set)[i];
+    optionCont.appendChild(document.createTextNode(Array.from(set)[i]));
+    selectQuer.append(optionCont);
+  }
+};
+let yearOptionMaker = set => {
+  let selectQuer = document.querySelector("select.select2");
+  for (let i = 0; i < set.size; i++) {
+    let optionCont = document.createElement("option");
+    optionCont.value = Array.from(set)[i];
+    optionCont.appendChild(document.createTextNode(Array.from(set)[i]));
+    selectQuer.append(optionCont);
+  }
+};
+/*spezilation start */
+let generatSpeiz = arr => {
+  selectAndButtonMaker(arr);
+  let arrOfYear = ["all"];
+  let arrOfSpez = ["all"];
+  for (let i = 0; i < arr.length; i++) {
+    let spez = arr[i].spez;
+    arrOfSpez.push(spez);
+    let year = arr[i].year;
+    arrOfYear.push(year);
+  }
+  let setOfSpez = new Set(arrOfSpez);
+  let setOfYear = new Set(arrOfYear);
+  spezOptionMaker(setOfSpez);
+  yearOptionMaker(setOfYear);
+  let filterButton = document.querySelector(".selectButton");
+  console.log(filterButton);
+  filterButton.addEventListener("click", () => {
+    generateFilterd(arr);
+  });
+};
+/*spezlation end */
+/*start click filter */
+
+/*end click filter */
+/*generate filterd option */
+let generateFilterd = arr => {
+  let typeCond = document.querySelector(".select").value;
+  let yearCond = document.querySelector(".select2").value;
+  console.log(typeCond);
+  console.log(yearCond);
+  let filterdArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    console.log(arr.length);
+    if (typeCond !== "all" && yearCond !== "all") {
+      if (arr[i].spez === typeCond && arr[i].year === yearCond) {
+        filterdArr.push(arr[i]);
+      }
+    } else if (typeCond === "all" && yearCond !== "all") {
+      if (arr[i].year === yearCond) {
+        filterdArr.push(arr[i]);
+      }
+    } else if (typeCond !== "all" && yearCond === "all") {
+      if (arr[i].spez === typeCond) {
+        filterdArr.push(arr[i]);
+      }
+    } else if (typeCond === "all" && yearCond === "all") {
+      filterdArr.push(arr[i]);
+    }
+  }
+  console.log(filterdArr);
+  if (filterdArr.length > 0) {
+    controlCenter(0, filterdArr);
+  } else {
+    makePopup(typeCond, yearCond);
+  }
+};
+
+/*end of generate filterd option */
+/*make a popup */
+let makePopup = (typeCond, yearCond) => {
+  let popCont = document.createElement("div");
+  popCont.classList.add("popup");
+  popCont.innerHTML = `Sorry their is'nt an event for (${typeCond}) in (${yearCond}) try use another filter`;
+  document.body.append(popCont);
+  document.body.classList.add("blur");
+  eventMainCont.classList.add("blur");
+
+  setTimeout(() => {
+    document.body.removeChild(popCont);
+    eventMainCont.classList.remove("blur");
+    document.body.classList.remove("blur");
+  }, 5000);
+};
+/*make a popup end */
+/*fetch json */
+window.onload = () => {
+  fetch("/jsonFiles/all.json")
+    .then(re => {
+      let rejson = re.json();
+      return rejson;
     })
-    li.classList.add("active")
-    
-
-    cards.forEach((card) => {
-
-      card.style.display = 'none'
-      
-    })
-
-    document.querySelectorAll(li.dataset.cat).forEach((e)=> e.style.display = 'block')
-
+    .then(re => {
+      let arrFromRe = Array.from(Object.values(re.oldEvents));
+      console.log(arrFromRe);
+      for (let i = 0; i < arrFromRe.length; i++) {
+        smallEventArr.push(arrFromRe[i]);
+        if (i === arrFromRe.length - 1) {
+          controlCenter(0, smallEventArr);
+          generatSpeiz(smallEventArr);
+        }
+      }
+    });
+};
+/*fetch json end */
+//end old events section
+//start new events section
+let newEvents = document.querySelector(".event");
+let image = document.querySelectorAll(".event-image-cont img:nth-child(2)");
+let buttonCont = document.querySelector(".daysButton");
+fetch("/jsonFiles/all.json")
+  .then(re => {
+    return re.json();
   })
-})
+  .then(re => {
+    console.log();
+    if (Array.from(Object.values(re["newEvents"])).length > 0) {
+      newEvents.classList.remove("dis");
+    } else {
+      console.log("no events");
+    }
+    buttonMakerCont(
+      Array.from(Object.values(re["newEvents"])).length,
+      Array.from(Object.values(re["newEvents"]))
+    );
+    console.log(Array.from(Object.values(re["newEvents"]))[0]);
+  });
+let buttonMaker = (number, img) => {
+  let button = document.createElement("button");
+  button.append(document.createTextNode(`day ${number + 1}`));
+  button.addEventListener("click", () => {
+    image[0].src = img[0];
+    console.log(image[0].src);
+    image[1].src = img[1];
+  });
+  if (number === 0) {
+    button.click();
+  }
+  buttonCont.append(button);
+};
+let buttonMakerCont = (num, imgLinks) => {
+  console.log(num);
 
-// end product section  
+  for (let i = 0; i < num; i++) {
+    buttonMaker(i, imgLinks[i]);
+  }
+};
+//end new event section

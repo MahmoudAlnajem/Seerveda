@@ -70,5 +70,135 @@
             "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             "new":true 
         }
-    ]
+    ],
+    "//1":"start the old events data",
+    "oldEvents":{
+        "event1":{
+            "title":"event1",
+            "short-desc":"1Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event1 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"10 May",
+            "link":"https://www.google.com",
+            "spez":"serrveda",
+            "year":"1999"
+        },
+        "event2":{
+            "title":"event2",
+            "short-desc":"2Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event2 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"20 May",
+            "link":"https://www.google.com",
+            "spez":"skin",
+            "year":"2021"
+        },
+        "event3":{
+            "title":"event3",
+            "short-desc":"3Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event3 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"30 May"
+            ,
+            "link":"https://www.google.com",
+            "spez":"skin",
+            "year":"2021"
+        },
+        "event4":{
+            "title":"event4",
+            "short-desc":"4Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event4 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"40 May",
+            "year":"2022"
+            ,
+            "link":"https://www.google.com",
+            "spez":"skin"
+        },
+        "event5":{
+            "title":"event5",
+            "short-desc":"5Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event5 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"50 May"
+            ,
+            "link":"https://www.google.com",
+            "spez":"skin",
+            "year":"2021"
+        },
+        "event6":{
+            "title":"event6",
+            "short-desc":"6Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event6 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"60 May",
+            "link":"https://www.google.com",
+            "spez":"blood",
+            "year":"2022"
+        },
+        "event7":{
+            "title":"event7",
+            "short-desc":"7Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event7 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"70 May",
+            "link":"https://www.google.com",
+            "spez":"blood",
+            "year":"2022"
+        },
+        "event8":{
+            "title":"event8",
+            "short-desc":"8Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event8 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"80 May",
+            "link":"https://www.google.com",
+            "spez":"blood",
+            "year":"2023"
+        },
+        "event9":{
+            "title":"event9",
+            "short-desc":"9Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event9 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"90 May"
+            ,
+            "link":"https://www.google.com",
+            "spez":"hand",
+            "year":"2024"
+            
+        },
+        "event10":{
+            "title":"event10",
+            "short-desc":"10Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event10 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"100 May"
+            ,
+            "link":"https://www.google.com",
+            "spez":"leg",
+            "year":"2023"
+        },
+        "event11":{
+            "title":"event11",
+            "short-desc":"11Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event11 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"110 May"
+            ,
+            "link":"https://www.google.com",
+            "spez":"jojo",
+            "year":"2153"
+        },  "event12":{
+            "title":"event11",
+            "short-desc":"11Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident Lorem ipsum dolor sit amet.",
+            "desc":"event11 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto facere, distinctio pariatur incidunt debitis esse possimus quaerat, ducimus ex in unde asperiores rerum illum numquam saepe harum. Itaque provident reprehenderit libero obcaecati sunt rem magnam, ipsum culpa mollitia aliquam impedit!<",
+            "date":"110 May"
+            ,
+            "link":"https://www.google.com",
+            "spez":"jojo",
+            "year":"2153"
+        }
+    },
+    "//2":"start new events data",
+     "newEvents":{
+        "day1-image":["../images/7.png","../images/3.png"],
+        "day2-image":["../images/4.png","../images/5.png"],
+        "day3-image":["../images/5.png","../images/5.png"],
+        "day4-image":["../images/6.png","../images/6.png"],
+        "day5-image":["../images/7.png","../images/7.png"],
+        "day6-image":["../images/8.png","../images/8.png"],
+        "day7-image":["../images/9.png","../images/9.png"],
+        "day8-image":["../images/10.png","../images/10.png"]
+    }
+
 }
