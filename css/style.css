@@ -571,7 +571,9 @@ header .links a:hover {
   width: -moz-fit-content;
   width: fit-content;
 }
-
+.section-title .title{
+  text-align: center;
+}
 .section-title ul {
   display: flex;
   justify-content: space-around;
@@ -583,6 +585,7 @@ header .links a:hover {
   padding: 10px;
   transition: .3s;
   cursor: pointer;
+  margin-right: 20px;
 }
 
 .section-title li:hover {
@@ -670,6 +673,28 @@ header .links a:hover {
   background-color: rgba(232, 44, 119);
 }
 
+.product .section-options ul select{
+  display: none;
+  transition: 0.3s;
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: transparent;
+  color: black;
+  border: 0;
+}
+.product .section-options ul select:focus{
+  background-color: #f2b863;
+  outline: 0;
+  color:white;
+}
+.product .section-options ul select:hover{
+  background-color: #f2b863;
+  color:white;
+}
+.product .section-options ul select option{
+  border: 0;
+}
 /* end poduct section  */
 
 

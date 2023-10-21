@@ -58,7 +58,7 @@ function set() {
 
 set();
 
-nextbutton.onclick = function() {
+nextbutton.onclick = function () {
   clearInterval(first);
   current++;
   if (current === imagesArr.length) {
@@ -72,7 +72,7 @@ nextbutton.onclick = function() {
   set();
 };
 
-prevbutton.onclick = function() {
+prevbutton.onclick = function () {
   clearInterval(first);
   current--;
   if (current < 0) {
@@ -88,11 +88,11 @@ prevbutton.onclick = function() {
 // ***********************************
 
 function removeAll() {
-  imagesArr.forEach(img => {
+  imagesArr.forEach((img) => {
     img.classList.remove("active");
   });
 
-  bulletsArr.forEach(p => {
+  bulletsArr.forEach((p) => {
     p.classList.remove("active");
   });
 }
@@ -103,11 +103,11 @@ function removeAll() {
 
 async function generatemanagmentCardsDependsOnRespnse() {
   let response = await fetch("jsonFiles/all.json")
-    .then(r => {
+    .then((r) => {
       let answer = r.json();
       return answer;
     })
-    .then(r => r["management"]);
+    .then((r) => r["management"]);
 
   for (val of response) {
     let swiperWrapper = document.querySelector(".swiper-wrapper");
@@ -209,11 +209,11 @@ let cards = [];
 
 async function generateproductsCardsDependsOnRespnse() {
   let response = await fetch("jsonFiles/all.json")
-    .then(r => {
+    .then((r) => {
       let res = r.json();
       return res;
     })
-    .then(r => {
+    .then((r) => {
       return r["products"];
     });
   for (val of response) {
@@ -224,6 +224,8 @@ async function generateproductsCardsDependsOnRespnse() {
     card.classList.add("product-card");
 
     card.classList.add("all");
+
+    card.classList.add(val.type);
 
     // start product image
 
@@ -299,21 +301,53 @@ generateproductsCardsDependsOnRespnse();
 
 let productLis = document.querySelectorAll(".product ul li");
 
-productLis.forEach(li => {
+let selectOps = document.querySelector(".product ul select");
+
+let productCardFilterButton = document.querySelector(".product-card-filter")
+
+productLis.forEach((li) => {
   li.addEventListener("click", () => {
-    productLis.forEach(el => {
+    productLis.forEach((el) => {
       el.classList.remove("active");
     });
     li.classList.add("active");
 
-    cards.forEach(card => {
+    cards.forEach((card) => {
       card.style.display = "none";
     });
 
+    selectOps.selectedIndex = 0;
+
+    selectOps.style.display = 'none'
+
     document
       .querySelectorAll(li.dataset.cat)
-      .forEach(e => (e.style.display = "block"));
+      .forEach((e) => (e.style.display = "block"));
   });
+});
+
+productCardFilterButton.addEventListener("click",() => {
+  selectOps.style.display = 'block'
+})
+
+
+selectOps.addEventListener("change", () => {
+  let op = selectOps.value;
+  
+  productLis.forEach((el) => {
+    el.classList.remove("active");
+  });
+
+  productLis[2].classList.add("active")
+
+  cards.forEach((card) => {
+    card.style.display = "none";
+  });
+
+  document.querySelectorAll(`.${op}`).forEach((e) => {
+    e.style.display ="block"
+  })
+
 });
 
 // end product section
@@ -336,8 +370,7 @@ let addAncherTobutton = document.querySelectorAll(
 /*functions */
 let resetClick = () => {
   let card = document.querySelectorAll(".cards-container .eventCard");
-  Array.from(card).forEach(ele => {
-    console.log();
+  Array.from(card).forEach((ele) => {
     ele.children[0].classList.contains("clicked")
       ? ele.children[0].classList.remove("clicked")
       : ele;
@@ -350,47 +383,46 @@ let controlCenter = (num, arr) => {
     makeCard(arr);
   }
   afterbutton.addEventListener("click", () => {
-    let Allcards = document.querySelector(".cards-container .small-cont")
-      .children;
+    let Allcards = document.querySelector(
+      ".cards-container .small-cont"
+    ).children;
     viewBort -= 320;
-    console.log(-320 * Math.floor(arr.length / 3));
     if (viewBort === -320 * Math.floor(arr.length / 3.1) - 320) {
       viewBort = 0;
       let usedStyle = `translateY(${viewBort}%)`;
-      Array.from(Allcards).forEach(ele => {
+      Array.from(Allcards).forEach((ele) => {
         ele.style.transform = usedStyle;
       });
     }
 
-    console.log(viewBort);
     let usedStyle = `translateY(${viewBort}%)`;
-    Array.from(Allcards).forEach(ele => {
+    Array.from(Allcards).forEach((ele) => {
       ele.style.transform = usedStyle;
     });
   });
   beforButton.addEventListener("click", () => {
-    let Allcards = document.querySelector(".cards-container .small-cont")
-      .children;
+    let Allcards = document.querySelector(
+      ".cards-container .small-cont"
+    ).children;
     if (viewBort === 0) {
       viewBort = -320 * Math.floor(arr.length / 3.1);
       let usedStyle = `translateY(${viewBort}%)`;
-      Array.from(Allcards).forEach(ele => {
+      Array.from(Allcards).forEach((ele) => {
         ele.style.transform = usedStyle;
       });
     } else {
       viewBort += 320;
     }
     let usedStyle = `translateY(${viewBort}%)`;
-    console.log(viewBort);
 
-    Array.from(Allcards).forEach(ele => {
+    Array.from(Allcards).forEach((ele) => {
       ele.style.transform = usedStyle;
     });
   });
 };
 /*control center end */
 /*card maker start */
-let makeCard = arr => {
+let makeCard = (arr) => {
   document.querySelector(".cards-container .small-cont").remove();
   let evenTcontDiv = document.createElement("div");
   evenTcontDiv.classList.add("small-cont");
@@ -453,7 +485,7 @@ let makeCard = arr => {
 /*card maker end */
 
 /*select maker start */
-let selectAndButtonMaker = arr => {
+let selectAndButtonMaker = (arr) => {
   let select = document.createElement("select");
   select.name = "Speizelation";
   select.classList.add("select");
@@ -472,7 +504,7 @@ let selectAndButtonMaker = arr => {
 };
 /*select maker end */
 /*option maker */
-let spezOptionMaker = set => {
+let spezOptionMaker = (set) => {
   let selectQuer = document.querySelector("select.select");
   for (let i = 0; i < set.size; i++) {
     let optionCont = document.createElement("option");
@@ -481,7 +513,7 @@ let spezOptionMaker = set => {
     selectQuer.append(optionCont);
   }
 };
-let yearOptionMaker = set => {
+let yearOptionMaker = (set) => {
   let selectQuer = document.querySelector("select.select2");
   for (let i = 0; i < set.size; i++) {
     let optionCont = document.createElement("option");
@@ -491,7 +523,7 @@ let yearOptionMaker = set => {
   }
 };
 /*spezilation start */
-let generatSpeiz = arr => {
+let generatSpeiz = (arr) => {
   selectAndButtonMaker(arr);
   let arrOfYear = ["all"];
   let arrOfSpez = ["all"];
@@ -506,7 +538,6 @@ let generatSpeiz = arr => {
   spezOptionMaker(setOfSpez);
   yearOptionMaker(setOfYear);
   let filterButton = document.querySelector(".selectButton");
-  console.log(filterButton);
   filterButton.addEventListener("click", () => {
     generateFilterd(arr);
   });
@@ -516,14 +547,11 @@ let generatSpeiz = arr => {
 
 /*end click filter */
 /*generate filterd option */
-let generateFilterd = arr => {
+let generateFilterd = (arr) => {
   let typeCond = document.querySelector(".select").value;
   let yearCond = document.querySelector(".select2").value;
-  console.log(typeCond);
-  console.log(yearCond);
   let filterdArr = [];
   for (let i = 0; i < arr.length; i++) {
-    console.log(arr.length);
     if (typeCond !== "all" && yearCond !== "all") {
       if (arr[i].spez === typeCond && arr[i].year === yearCond) {
         filterdArr.push(arr[i]);
@@ -540,7 +568,6 @@ let generateFilterd = arr => {
       filterdArr.push(arr[i]);
     }
   }
-  console.log(filterdArr);
   if (filterdArr.length > 0) {
     controlCenter(0, filterdArr);
   } else {
@@ -568,13 +595,12 @@ let makePopup = (typeCond, yearCond) => {
 /*fetch json */
 window.onload = () => {
   fetch("/jsonFiles/all.json")
-    .then(re => {
+    .then((re) => {
       let rejson = re.json();
       return rejson;
     })
-    .then(re => {
+    .then((re) => {
       let arrFromRe = Array.from(Object.values(re.oldEvents));
-      console.log(arrFromRe);
       for (let i = 0; i < arrFromRe.length; i++) {
         smallEventArr.push(arrFromRe[i]);
         if (i === arrFromRe.length - 1) {
@@ -591,11 +617,10 @@ let newEvents = document.querySelector(".event");
 let image = document.querySelectorAll(".event-image-cont img:nth-child(2)");
 let buttonCont = document.querySelector(".daysButton");
 fetch("/jsonFiles/all.json")
-  .then(re => {
+  .then((re) => {
     return re.json();
   })
-  .then(re => {
-    console.log();
+  .then((re) => {
     if (Array.from(Object.values(re["newEvents"])).length > 0) {
       newEvents.classList.remove("dis");
     } else {
@@ -605,14 +630,12 @@ fetch("/jsonFiles/all.json")
       Array.from(Object.values(re["newEvents"])).length,
       Array.from(Object.values(re["newEvents"]))
     );
-    console.log(Array.from(Object.values(re["newEvents"]))[0]);
   });
 let buttonMaker = (number, img) => {
   let button = document.createElement("button");
   button.append(document.createTextNode(`day ${number + 1}`));
   button.addEventListener("click", () => {
     image[0].src = img[0];
-    console.log(image[0].src);
     image[1].src = img[1];
   });
   if (number === 0) {
@@ -621,8 +644,6 @@ let buttonMaker = (number, img) => {
   buttonCont.append(button);
 };
 let buttonMakerCont = (num, imgLinks) => {
-  console.log(num);
-
   for (let i = 0; i < num; i++) {
     buttonMaker(i, imgLinks[i]);
   }

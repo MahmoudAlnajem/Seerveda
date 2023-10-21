@@ -38,37 +38,43 @@
             "image": "images/1.png",
             "title": "Gluta Veda",
             "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "new":false 
+            "new":false ,
+            "type":"typ1"
         },
         {
             "image": "images/2.png",
             "title": "Gluta Veda",
             "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "new":true 
+            "new":true ,
+            "type":"typ1"
         },
         {
             "image": "images/3.png",
             "title": "Gluta Veda",
             "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "new":false 
+            "new":false ,
+            "type":"typ2"
         },
         {
             "image": "images/4.png",
             "title": "Gluta Veda",
             "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit. ",
-            "new":false 
+            "new":false ,
+            "type":"typ3"
         },
         {
             "image": "images/5.png",
             "title": "Gluta Veda",
             "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "new":true 
+            "new":true ,
+            "type":"typ2"
         },
         {
             "image": "images/6.png",
             "title": "Gluta Veda",
             "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-            "new":true 
+            "new":true ,
+            "type":"typ3"
         }
     ],
     "//1":"start the old events data",
