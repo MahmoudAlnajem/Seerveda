@@ -205,6 +205,7 @@ async function generatemanagmentCardsDependsOnRespnse() {
 generatemanagmentCardsDependsOnRespnse();
 
 // start product section
+
 let cards = [];
 
 async function generateproductsCardsDependsOnRespnse() {
@@ -216,6 +217,33 @@ async function generateproductsCardsDependsOnRespnse() {
     .then((r) => {
       return r["products"];
     });
+
+// start making the select options dynamic 
+
+  let typesArr = [];
+
+  for (val of response) {
+    typesArr.push(val.type);
+  }
+
+  typesArr = new Set(typesArr);
+
+  function generateSelectOps() {
+    typesArr.forEach((el) => {
+      let selectOption = document.createElement("option");
+
+      selectOption.textContent = el;
+
+      document
+        .querySelector(".section-options ul select")
+        .appendChild(selectOption);
+    });
+  }
+
+  generateSelectOps();
+
+// Finish making the select options dynamic 
+
   for (val of response) {
     let cardsConatiner = document.querySelector(".cards");
 
@@ -303,7 +331,7 @@ let productLis = document.querySelectorAll(".product ul li");
 
 let selectOps = document.querySelector(".product ul select");
 
-let productCardFilterButton = document.querySelector(".product-card-filter")
+let productCardFilterButton = document.querySelector(".product-card-filter");
 
 productLis.forEach((li) => {
   li.addEventListener("click", () => {
@@ -318,7 +346,7 @@ productLis.forEach((li) => {
 
     selectOps.selectedIndex = 0;
 
-    selectOps.style.display = 'none'
+    selectOps.style.display = "none";
 
     document
       .querySelectorAll(li.dataset.cat)
@@ -326,28 +354,26 @@ productLis.forEach((li) => {
   });
 });
 
-productCardFilterButton.addEventListener("click",() => {
-  selectOps.style.display = 'block'
-})
-
+productCardFilterButton.addEventListener("click", () => {
+  selectOps.style.display = "block";
+});
 
 selectOps.addEventListener("change", () => {
   let op = selectOps.value;
-  
+
   productLis.forEach((el) => {
     el.classList.remove("active");
   });
 
-  productLis[2].classList.add("active")
+  productLis[2].classList.add("active");
 
   cards.forEach((card) => {
     card.style.display = "none";
   });
 
   document.querySelectorAll(`.${op}`).forEach((e) => {
-    e.style.display ="block"
-  })
-
+    e.style.display = "block";
+  });
 });
 
 // end product section

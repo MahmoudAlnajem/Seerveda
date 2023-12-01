@@ -75,6 +75,13 @@
             "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             "new":true ,
             "type":"typ3"
+        },
+        {
+            "image": "images/6.png",
+            "title": "Gluta Veda",
+            "des" :"Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "new":true ,
+            "type":"typ4"
         }
     ],
     "//1":"start the old events data",
