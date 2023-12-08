@@ -84,7 +84,6 @@
             "type":"typ4"
         }
     ],
-    "//1":"start the old events data",
     "oldEvents":{
         "event1":{
             "title":"event1",
@@ -202,7 +201,6 @@
             "year":"2153"
         }
     },
-    "//2":"start new events data",
      "newEvents":{
         "day1-image":["../images/7.png","../images/3.png"],
         "day2-image":["../images/4.png","../images/5.png"],
@@ -212,6 +210,13 @@
         "day6-image":["../images/8.png","../images/8.png"],
         "day7-image":["../images/9.png","../images/9.png"],
         "day8-image":["../images/10.png","../images/10.png"]
-    }
-
+    },
+    "footer":[
+        {
+            "text":"Live A Healthy Life Style",
+            "location":"Egypt, Giza, Inside The Sphinx, Room Number 220",
+            "timeWork":"Egypt, Giza, Inside The Sphinx, Room Number 220",
+            "phone":"+963953580434"
+        }
+    ]
 }

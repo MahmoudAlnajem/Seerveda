@@ -19,6 +19,14 @@ BurgerLinks.addEventListener("click", () => {
   }
 });
 
+document.querySelectorAll("section").forEach((sec) => {
+  sec.addEventListener("click",()=>{
+    slideNav.style.left = "-1000px";
+    header.classList.remove("hoverd");
+    BurgerLinks.classList.remove("clicked");
+  })
+})
+
 // end slide nav
 
 // start image slider
@@ -675,3 +683,26 @@ let buttonMakerCont = (num, imgLinks) => {
   }
 };
 //end new event section
+// start footer section
+async function getFooterData(){
+  
+  let reponse = await fetch("jsonFiles/all.json").then((re) => re.json()).then(re => re.footer[0])
+
+  let footerText = document.querySelector("footer .container .col-1 p")
+  
+  footerText.textContent = reponse.text
+
+  let footerLocation = document.querySelector("footer .container .col-3 div:first-of-type span")
+
+  footerLocation.textContent = reponse.location
+
+  let footerTimeWork = document.querySelector("footer .container .col-3 div:nth-of-type(2) span")
+
+  footerTimeWork.textContent = reponse.timeWork
+
+  let footerPhone = document.querySelector("footer .container .col-3 div:nth-of-type(3) span")
+
+  footerPhone.textContent = reponse.phone
+}
+getFooterData()
+// end footer section 

@@ -11,7 +11,7 @@
       href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="shortcut icon" href="images/Seer_Veda_Logo_1-removebg.ico">
+    <link rel="shortcut icon" href="images/Seer_Veda_Logo_1-removebg.ico" />
     <script src="main.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,10 +30,9 @@
     <header>
       <div class="container">
         <div class="logo-image">
-          <img src="images/Seer_Veda_Logo_1-removebg.png" decoding = "async" />
+          <img src="images/Seer_Veda_Logo_1-removebg.png" decoding="async" />
         </div>
         <div class="logo">
-          <!-- <img src="images/Seer_Veda_Logo_1-removebg.png" decoding = "async"> -->
           <div class="brand-name" id="brand-name">Seerveda</div>
           <span id="brand-text">Live A Healthy Lifestyle</span>
         </div>
@@ -47,57 +46,67 @@
         </div>
       </div>
       <div class="links">
-        <a href="">Products</a>
-        <a href="">Events</a>
+        <a href="#products">Products</a>
+        <a href="#old-events">Events</a>
         <a href="">About us</a>
       </div>
     </header>
 
-
     <div class="slide-nav">
       <ul>
         <li>
-          <span>Products</span>
-          <span><i class="fa-solid fa-angle-right"></i></span>
+          <a href="#products">
+            <span>Products</span>
+            <span><i class="fa-solid fa-angle-right"></i></span>
+          </a>
         </li>
         <li>
-          <span>Events</span>
-          <span><i class="fa-solid fa-angle-right"></i></span>
+          <a href="#old-events">
+            <span>Events</span>
+            <span><i class="fa-solid fa-angle-right"></i></span>
+          </a>
         </li>
         <li>
-          <span>Latest Events</span>
-          <span><i class="fa-solid fa-angle-right"></i></span>
+          <a href="#new-events">
+            <span>Latest Events</span>
+            <span><i class="fa-solid fa-angle-right"></i></span>
+          </a>
         </li>
         <li>
-          <span>Contact Us</span>
-          <span><i class="fa-solid fa-angle-right"></i></span>
+          <a href="#contact-us"
+            ><span>Contact Us</span>
+            <span><i class="fa-solid fa-angle-right"></i></span
+          ></a>
         </li>
         <li>
-          <span>About Us</span>
-          <span><i class="fa-solid fa-angle-right"></i></span>
+          <a href=""
+            ><span>About Us</span>
+            <span><i class="fa-solid fa-angle-right"></i></span
+          ></a>
         </li>
         <li>
-          <span>Management</span>
-          <span><i class="fa-solid fa-angle-right"></i></span>
+          <a href="#management"
+            ><span>Management</span>
+            <span><i class="fa-solid fa-angle-right"></i></span
+          ></a>
         </li>
       </ul>
       <button>Log As Adminisrator</button>
     </div>
 
-
     <!-- start landing section  -->
-    <div class="landing-sec">
+    <section class="landing-sec">
       <div class="image-container">
-        <img src="images/1.png" decoding = "async" class="active" />
-        <img src="images/2.png" decoding = "async" />
-        <img src="images/3.png" decoding = "async" />
-        <img src="images/4.png" decoding = "async" />
-        <img src="images/5.png" decoding = "async" />
-        <img src="images/6.png" decoding = "async" />
-        <img src="images/7.png" decoding = "async" />
-        <img src="images/8.png" decoding = "async" />
-        <img src="images/9.png" decoding = "async" />
-        <img src="images/10.png" decoding = "async" />
+        <img src="images/1.png" decoding="async" class="active" />
+        <img src="images/2.png" decoding="async" />
+        <img src="images/3.png" decoding="async" />
+        <img src="images/4.png" decoding="async" />
+        <img src="images/5.png" decoding="async" />
+        <img src="images/6.png" decoding="async" />
+        <img src="images/7.png" decoding="async" />
+        <img src="images/8.png" decoding="async" />
+        <img src="images/9.png" decoding="async" />
+        <img src="images/10.png" decoding="async" />
       </div>
       <div class="navigation-angles">
         <i class="fa-solid fa-angle-right right"></i>
@@ -110,97 +119,157 @@
           <li></li>
         </ul>
       </div>
-    </div>
+    </section>
     <!-- end landing section  -->
 
-
     <!-- start management section  -->
-    <section class="management swiper mySwiper">
+    <section class="management swiper mySwiper" id="management">
       <div class="swiper-wrapper"></div>
     </section>
     <!-- end management section  -->
 
     <!-- start procuct sectiom  -->
-
-    <section class="product">
+    <section class="product" id="products">
       <div class="container">
         <div class="section-title">
           <h2 class="title">Featured Products</h2>
           <div class="section-options">
             <ul>
-              <li class="active" data-cat =".all"><a>All</a></li>
-              <li data-cat =".new"><a>New</a></li>
+              <li class="active" data-cat=".all"><a>All</a></li>
+              <li data-cat=".new"><a>New</a></li>
               <li class="product-card-filter"><a>Filter by:</a></li>
-              <select> 
-                <option disabled selected>Select : </option>
+              <select>
+                <option disabled selected>Select :</option>
               </select>
             </ul>
           </div>
         </div>
-        <div class="cards">
-        </div>
+        <div class="cards"></div>
       </div>
     </section>
-
     <!-- end procuct sectiom  -->
+
     <!--start old events section-->
-    
-    <section class="Events-cont">
-        
+    <section class="Events-cont" id="old-events">
       <div class="left-side">
-          <div class="left-sid-cont">
-              <div>
-                  <div>
-                      <h1 id="desc"></h1>
-                      <p></p>
-                      <button> <a href="">see full event on youtube</a> </button>
-                  </div>
-              </div>
+        <div class="left-sid-cont">
+          <div>
+            <div>
+              <h1 id="desc"></h1>
+              <p></p>
+              <button><a href="">see full event on youtube</a></button>
+            </div>
           </div>
-          <div class="decoration-text">
-              <h1>
-              old events section
-              </h1>
-          </div>
-      </div> 
+        </div>
+        <div class="decoration-text">
+          <h1>old events section</h1>
+        </div>
+      </div>
 
       <div class="cards-container">
-          
-          
-             
-         <div class="spans">
+        <div class="spans">
           <i class="fa-solid fa-arrow-left" id="befor"></i>
           <i class="fa-solid fa-arrow-right" id="after"></i>
-         </div>
-         <div class="small-cont"></div>
+        </div>
+        <div class="small-cont"></div>
       </div>
-
     </section>
     <!--end old events section -->
+
     <!--start new events section-->
-    
-    <section class="event dis">
-     
+    <section class="event dis" id="new-events">
       <div class="sectionHeader">
-        <div class="daysButton">
-         
-        </div>
+        <div class="daysButton"></div>
         <h1 class="eventsText">Our New events</h1>
       </div>
-    <div class="event-image-cont">
-       <img src="images/1.png" decoding = "async">
-       <img src="images/2.png" decoding = "async">
-       <img src="images/1.png" decoding = "async">
-    </div>
-    <div class="event-image-cont">
-      <img src="images/1.png" decoding = "async">
-      <img src="images/2.png" decoding = "async">
-      <img src="images/1.png" decoding = "async">
-   </div>
-  
-   
+      <div class="event-image-cont">
+        <img src="images/1.png" decoding="async" />
+        <img src="images/2.png" decoding="async" />
+        <img src="images/1.png" decoding="async" />
+      </div>
+      <div class="event-image-cont">
+        <img src="images/1.png" decoding="async" />
+        <img src="images/2.png" decoding="async" />
+        <img src="images/1.png" decoding="async" />
+      </div>
     </section>
     <!--end new events section-->
+
+    <!-- start contact us  -->
+    <section class="discount" id="contact-us">
+      <div class="discount-text">
+        <div class="content">
+          <h2>Let's Talk Together</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi
+            asperiores consectetur, recusandae ratione provident necessitatibus,
+            cumque delectus commodi fuga praesentium beatae. Totam vel similique
+            laborum dicta aperiam odit doloribus corporis.
+          </p>
+          <img src="images/discount (1).png" alt="" />
+        </div>
+      </div>
+      <div class="discount-form">
+        <h2>Contact Us</h2>
+        <form action="">
+          <input type="text" placeholder="Your Name" />
+          <input type="email" placeholder="Your Email" />
+          <input type="text" placeholder="Your Phone" />
+          <textarea placeholder="Tell Us About Your Needs"></textarea>
+          <input type="submit" value="Send" />
+        </form>
+      </div>
+    </section>
+    <!-- start contact us  -->
+
+    <!-- start footer -->
+    <footer>
+      <div class="container">
+        <div class="col-1">
+          <h1 class="logo">
+            <img src="images/Seer_Veda_Logo_1-removebg.png" alt="" />
+          </h1>
+          <div class="social-icons">
+            <a href=""><i class="fab fa-facebook-f"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-youtube"></i></a>
+          </div>
+          <p></p>
+        </div>
+        <div class="col-2">
+          <a href="#products">Products</a>
+          <a href="#old-events">Events</a>
+          <a href="#new-events">Latest Events</a>
+          <a href="#management">Managment</a>
+          <a href="#contact-us">Contact Us</a>
+        </div>
+        <div class="col-3">
+          <div class="text">
+            <i class="fas fa-map-marker-alt fa-fw"></i>
+            <span></span>
+          </div>
+          <div class="text">
+            <i class="far fa-clock fa-fw"></i>
+            <span>Egypt, Giza, Inside The Sphinx, Room Number 220</span>
+          </div>
+          <div class="text">
+            <i class="fas fa-phone-volume fa-fw"></i>
+            <span>Egypt, Giza, Inside The Sphinx, Room Number 220</span>
+          </div>
+        </div>
+        <div class="col-4">
+          <img src="images/1.png" />
+          <img src="images/2.png" />
+          <img src="images/3.png" />
+          <img src="images/4.png" />
+          <img src="images/5.png" />
+          <img src="images/6.png" />
+        </div>
+      </div>
+      <p class="copyrights">Made With By <span>MHN & AHJ</span></p>
+    </footer>
+    <!-- End footer -->
+
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
     <!-- Initialize Swiper -->
