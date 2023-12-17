@@ -3,26 +3,37 @@
 let BurgerLinks = document.querySelector(".burger-links");
 
 BurgerLinks.addEventListener("click", () => {
+
   BurgerLinks.classList.toggle("clicked");
+
 });
 let header = document.querySelector("header");
 
 let slideNav = document.querySelector(".slide-nav");
 
 BurgerLinks.addEventListener("click", () => {
+
   if (BurgerLinks.classList.contains("clicked")) {
+
     slideNav.style.left = "0";
+
     header.classList.add("hoverd");
   } else {
+
     slideNav.style.left = "-1000px";
+
     header.classList.remove("hoverd");
   }
 });
 
 document.querySelectorAll("section").forEach((sec) => {
+
   sec.addEventListener("click",()=>{
+
     slideNav.style.left = "-1000px";
+
     header.classList.remove("hoverd");
+
     BurgerLinks.classList.remove("clicked");
   })
 })
@@ -36,7 +47,9 @@ let imagesArr = document.querySelectorAll(".landing-sec .image-container img");
 let politsContainer = document.querySelector(".images-polits ul");
 
 for (i = 0; i < imagesArr.length; i++) {
+
   let liPolit = document.createElement("li");
+
   politsContainer.appendChild(liPolit);
 }
 
@@ -388,15 +401,25 @@ selectOps.addEventListener("change", () => {
 //start old events section
 /*selecting */
 let eventCard = document.querySelectorAll(".eventCard");
+
 let eventHeader = document.querySelector(".left-sid-cont h1");
+
 let eventParagraph = document.querySelector(".left-sid-cont p");
+
 let linkEvent = document.querySelector(".left-sid-cont button a");
+
 let cardCont = document.querySelector(".cards-container");
+
 let evenTdotsCont = document.querySelector(".cards-container .spans");
+
 let smallEventArr = [];
+
 let beforButton = document.querySelector(".spans #befor");
+
 let afterbutton = document.querySelector(".spans #after");
+
 let eventMainCont = document.querySelector(".Events-cont");
+
 let addAncherTobutton = document.querySelectorAll(
   ".eventCard div:nth-child(2) button"
 );
@@ -519,16 +542,20 @@ let makeCard = (arr) => {
 /*card maker end */
 
 /*select maker start */
+let select = document.createElement("select");
+let select2 = document.createElement("select");
 let selectAndButtonMaker = (arr) => {
-  let select = document.createElement("select");
+  
   select.name = "Speizelation";
   select.classList.add("select");
+  select.setAttribute("id","select1")
   let selectButton = document.createElement("button");
   selectButton.classList.add("selectButton");
   selectButton.innerText = "Filter Events";
-  let select2 = document.createElement("select");
+  
   select2.name = "year";
   select2.classList.add("select2");
+  select2.setAttribute("id","select2")
   let selectCont = document.createElement("div");
   selectCont.append(select);
   selectCont.append(select2);
@@ -577,9 +604,7 @@ let generatSpeiz = (arr) => {
   });
 };
 /*spezlation end */
-/*start click filter */
 
-/*end click filter */
 /*generate filterd option */
 let generateFilterd = (arr) => {
   let typeCond = document.querySelector(".select").value;
@@ -609,21 +634,34 @@ let generateFilterd = (arr) => {
   }
 };
 
+
 /*end of generate filterd option */
 /*make a popup */
 let makePopup = (typeCond, yearCond) => {
   let popCont = document.createElement("div");
-  popCont.classList.add("popup");
   popCont.innerHTML = `Sorry their is'nt an event for (${typeCond}) in (${yearCond}) try use another filter`;
-  document.body.append(popCont);
-  document.body.classList.add("blur");
-  eventMainCont.classList.add("blur");
+  document.querySelector(".cards-container").prepend(popCont)
+  popCont.classList.add("popup");
 
-  setTimeout(() => {
-    document.body.removeChild(popCont);
-    eventMainCont.classList.remove("blur");
-    document.body.classList.remove("blur");
-  }, 5000);
+  select.addEventListener("change",()=>  {
+    document.querySelector(".cards-container").removeChild(popCont)
+  })
+  select2.addEventListener("change",()=>  {
+    document.querySelector(".cards-container").removeChild(popCont)
+  })
+  // let makePopup = (typeCond, yearCond) => {
+  //   let popCont = document.createElement("div");
+  //   popCont.classList.add("popup");
+  //   popCont.innerHTML = `Sorry their is'nt an event for (${typeCond}) in (${yearCond}) try use another filter`;
+  //   document.body.append(popCont);
+  //   document.body.classList.add("blur");
+  //   eventMainCont.classList.add("blur");
+  
+  //   setTimeout(() => {
+  //     document.body.removeChild(popCont);
+  //     eventMainCont.classList.remove("blur");
+  //     document.body.classList.remove("blur");
+  //   }, 4000);
 };
 /*make a popup end */
 /*fetch json */
