@@ -5,7 +5,7 @@ let BurgerLinks = document.querySelector(".burger-links");
 BurgerLinks.addEventListener("click", () => {
 
   BurgerLinks.classList.toggle("clicked");
-
+  
 });
 let header = document.querySelector("header");
 
