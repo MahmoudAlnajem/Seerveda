@@ -25,7 +25,6 @@
       href="https://fonts.googleapis.com/css2?family=Abel&display=swap"
       rel="stylesheet"
     />
-      <script src="https://cdn.tailwindcss.com"></script> 
   </head>
   <body>
     <header>
@@ -46,11 +45,6 @@
           <span> </span>
         </div>
       </div>
-      <!-- <div class="links">
-        <a href="#products">Products</a>
-        <a href="#old-events">Events</a>
-        <a href="">About us</a>
-      </div> -->
     </header>
 
     <div class="slide-nav">
@@ -76,12 +70,6 @@
         <li>
           <a href="#contact-us"
             ><span>Contact Us</span>
-            <span><i class="fa-solid fa-angle-right"></i></span
-          ></a>
-        </li>
-        <li>
-          <a href=""
-            ><span>About Us</span>
             <span><i class="fa-solid fa-angle-right"></i></span
           ></a>
         </li>
@@ -212,17 +200,31 @@
       </div>
       <div class="discount-form">
         <h2>Contact Us</h2>
-        <form id="contact-form" method="POST" action="https://formspree.io/f/mqadnobl" style="display: flex; flex-direction: column">
-          <input type="text" placeholder="Your Name" name="userName" required/>
-          <input type="email" placeholder="Your Email" name="userEmail" required/>
+        <form
+          id="contact-form"
+          method="POST"
+          action="https://formspree.io/f/mqadnobl"
+          style="display: flex; flex-direction: column"
+        >
+          <input type="text" placeholder="Your Name" name="userName" required />
+          <input
+            type="email"
+            placeholder="Your Email"
+            name="userEmail"
+            required
+          />
           <input type="text" placeholder="Your Phone" name="userPhone" />
-          <textarea placeholder="Tell Us About Your Needs" name="userMassage" required></textarea>
-           <button type="submit" id="submit-button"
-                    class="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
-                Send Message
-            </button>
+          <textarea
+            placeholder="Tell Us About Your Needs"
+            name="userMassage"
+            required
+          ></textarea>
+          <button type="submit" id="submit-button">Send Message</button>
         </form>
-         <div id="message-container" class="mt-4 p-4 rounded-md text-sm text-center font-medium transition-all duration-300 transform scale-0 opacity-0"></div>
+        <div
+          id="message-container"
+          class="mt-4 p-4 rounded-md text-sm text-center font-medium transition-all duration-300 transform scale-0 opacity-0"
+        ></div>
       </div>
     </section>
     <!-- start contact us  -->
@@ -271,82 +273,138 @@
           <img src="images/6.png" />
         </div>
       </div>
-      <p class="copyrights">Made With By <span>MHN & AHJ</span></p>
+      <p class="copyrights">
+        Made With By <span>Mahmoud Alnajem & Ahmad Joha</span>
+      </p>
     </footer>
     <!-- End footer -->
-  <!-- admine panel -->
-   <!-- Login Section -->
-    <div id="login-section" class="login-section-disabled items-center justify-center min-h-screen">
-        <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold text-center">Admin Login</h2>
-            <div>
-                <label for="email" class="text-sm font-medium">Email</label>
-                <input type="email" id="email" class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="admin@example.com">
-            </div>
-            <div>
-                <label for="password" class="text-sm font-medium">Password</label>
-                <input type="password" id="password" class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••">
-            </div>
-            <p id="login-error" class="text-sm text-red-500 text-center"></p>
-            <button id="login-button" class="w-full px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Login
-            </button>
+    <!-- admine panel -->
+    <!-- Login Section -->
+    <div
+      id="login-section"
+      class="login-section-disabled items-center justify-center min-h-screen"
+    >
+      <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-center">Admin Login</h2>
+        <div>
+          <label for="email" class="text-sm font-medium">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="admin@example.com"
+          />
         </div>
+        <div>
+          <label for="password" class="text-sm font-medium">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="••••••••"
+          />
+        </div>
+        <p id="login-error" class="text-sm text-red-500 text-center"></p>
+        <button
+          id="login-button"
+          class="w-full px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          Login
+        </button>
+      </div>
     </div>
 
     <!-- Admin Panel Section -->
     <div id="admin-panel" class="hidden p-4 md:p-8">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold">Content Management</h1>
-            <button id="logout-button" class="px-4 py-2 font-semibold text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-                Logout
-            </button>
-          </div>
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">Content Management</h1>
+        <button
+          id="logout-button"
+          class="px-4 py-2 font-semibold text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+        >
+          Logout
+        </button>
+      </div>
 
-        <div id="loading-state" class="text-center p-10">
-            <p class="text-lg">Loading content from Firebase...</p>
+      <div id="loading-state" class="text-center p-10">
+        <p class="text-lg">Loading content from Firebase...</p>
+      </div>
+
+      <div id="content-sections" class="hidden space-y-8">
+        <!-- Management Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-2xl font-semibold mb-4">Management</h2>
+          <textarea
+            id="management-json"
+            class="w-full h-96 p-4 border rounded-md font-mono text-sm"
+            title="management-json"
+          ></textarea>
+          <button
+            onclick="saveData('management')"
+            class="mt-4 px-6 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700"
+          >
+            Save Management
+          </button>
         </div>
 
-        <div id="content-sections" class="hidden space-y-8">
-            <!-- Management Section -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-semibold mb-4">Management</h2>
-                <textarea id="management-json" class="w-full h-96 p-4 border rounded-md font-mono text-sm" title="management-json"></textarea>
-                <button onclick="saveData('management')" class="mt-4 px-6 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700">Save Management</button>
-            </div>
-
-            <!-- Products Section -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-semibold mb-4">Products</h2>
-                <textarea id="products-json" class="w-full h-96 p-4 border rounded-md font-mono text-sm" title="products-json"></textarea>
-                <button onclick="saveData('products')" class="mt-4 px-6 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700">Save Products</button>
-            </div>
-
-            <!-- Old Events Section -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-semibold mb-4">Old Events</h2>
-                <textarea id="oldEvents-json" class="w-full h-96 p-4 border rounded-md font-mono text-sm" title="oldEvents-json"></textarea>
-                <button onclick="saveData('oldEvents')" class="mt-4 px-6 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700">Save Old Events</button>
-            </div>
-
-            <!-- New Events Section -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-semibold mb-4">New Events</h2>
-                <textarea id="newEvents-json" class="w-full h-96 p-4 border rounded-md font-mono text-sm" title="newEvents-json"></textarea>
-                <button onclick="saveData('newEvents')" class="mt-4 px-6 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700">Save New Events</button>
-            </div>
+        <!-- Products Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-2xl font-semibold mb-4">Products</h2>
+          <textarea
+            id="products-json"
+            class="w-full h-96 p-4 border rounded-md font-mono text-sm"
+            title="products-json"
+          ></textarea>
+          <button
+            onclick="saveData('products')"
+            class="mt-4 px-6 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700"
+          >
+            Save Products
+          </button>
         </div>
+
+        <!-- Old Events Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-2xl font-semibold mb-4">Old Events</h2>
+          <textarea
+            id="oldEvents-json"
+            class="w-full h-96 p-4 border rounded-md font-mono text-sm"
+            title="oldEvents-json"
+          ></textarea>
+          <button
+            onclick="saveData('oldEvents')"
+            class="mt-4 px-6 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700"
+          >
+            Save Old Events
+          </button>
+        </div>
+
+        <!-- New Events Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-2xl font-semibold mb-4">New Events</h2>
+          <textarea
+            id="newEvents-json"
+            class="w-full h-96 p-4 border rounded-md font-mono text-sm"
+            title="newEvents-json"
+          ></textarea>
+          <button
+            onclick="saveData('newEvents')"
+            class="mt-4 px-6 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700"
+          >
+            Save New Events
+          </button>
+        </div>
+      </div>
     </div>
-    
+
     <!-- Toast Notification -->
     <div id="toast" class="toast"></div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
     <!-- Initialize Swiper -->
     <script>
-       let swiper = new Swiper(".mySwiper", {
+      let swiper = new Swiper(".mySwiper", {
         effect: "coverflow",
         grabCursor: true,
         centeredSlides: true,
@@ -364,66 +422,78 @@
       });
     </script>
     <!-- end card Swiper JS -->
-  <!-- start admin dashboard -->
+    <!-- start admin dashboard -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
-  <!--end admin dashboard-->
-  <!--contact us scripts-->
-     <script>
-        const form = document.getElementById('contact-form');
-        const submitButton = document.getElementById('submit-button');
-        const messageContainer = document.getElementById('message-container');
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <!--end admin dashboard-->
+    <!--contact us scripts-->
+    <script>
+      const form = document.getElementById("contact-form");
+      const submitButton = document.getElementById("submit-button");
+      const messageContainer = document.getElementById("message-container");
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Show a sending message and disable the button
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
-            messageContainer.style.opacity = '0';
-            messageContainer.style.transform = 'scale(0)';
-            
-            // Get the form data
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-            try {
-                // Use fetch to send the form data to Formspree
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
+        // Show a sending message and disable the button
+        submitButton.textContent = "Sending...";
+        submitButton.disabled = true;
+        messageContainer.style.opacity = "0";
+        messageContainer.style.transform = "scale(0)";
 
-                if (response.ok) {
-                    // Success!
-                    showMessage('Message sent successfully! Thank you.', 'bg-green-100 text-green-700');
-                    form.reset(); // Clear the form fields
-                } else {
-                    // Server returned an error
-                    const responseData = await response.json();
-                    if (responseData.errors) {
-                        showMessage('Something went wrong. Please try again later.', 'bg-red-100 text-red-700');
-                    } else {
-                        showMessage('An unknown error occurred. Please try again.', 'bg-red-100 text-red-700');
-                    }
-                }
-            } catch (error) {
-                // Network error
-                showMessage('Network error. Please check your connection and try again.', 'bg-red-100 text-red-700');
-            } finally {
-                // Re-enable the button and restore the text
-                submitButton.textContent = 'Send Message';
-                submitButton.disabled = false;
+        // Get the form data
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+          // Use fetch to send the form data to Formspree
+          const response = await fetch(form.action, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          if (response.ok) {
+            // Success!
+            showMessage(
+              "Message sent successfully! Thank you.",
+              "bg-green-100 text-green-700"
+            );
+            form.reset(); // Clear the form fields
+          } else {
+            // Server returned an error
+            const responseData = await response.json();
+            if (responseData.errors) {
+              showMessage(
+                "Something went wrong. Please try again later.",
+                "bg-red-100 text-red-700"
+              );
+            } else {
+              showMessage(
+                "An unknown error occurred. Please try again.",
+                "bg-red-100 text-red-700"
+              );
             }
-        });
-
-        function showMessage(text, className) {
-            messageContainer.textContent = text;
-            messageContainer.className = `mt-4 p-4 rounded-md text-sm text-center font-medium transition-all duration-300 transform ${className} scale-100 opacity-100`;
+          }
+        } catch (error) {
+          // Network error
+          showMessage(
+            "Network error. Please check your connection and try again.",
+            "bg-red-100 text-red-700"
+          );
+        } finally {
+          // Re-enable the button and restore the text
+          submitButton.textContent = "Send Message";
+          submitButton.disabled = false;
         }
+      });
+
+      function showMessage(text, className) {
+        messageContainer.textContent = text;
+        messageContainer.className = `mt-4 p-4 rounded-md text-sm text-center font-medium transition-all duration-300 transform ${className} scale-100 opacity-100`;
+      }
     </script>
   </body>
 </html>

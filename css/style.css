@@ -35,9 +35,9 @@
   --second-color: #060620;
   --third: #10113c;
   --background-color: #747898;
-  --color: #9176FF;
-  --font: 'Poppins', sans-serif;
-  --gold-second: #F6DC3B;
+  --color: #9176ff;
+  --font: "Poppins", sans-serif;
+  --gold-second: #f6dc3b;
   --second-font: sans-serif;
 }
 
@@ -280,59 +280,6 @@ header .container .logo span {
   }
 }
 
-header .container .icons i {
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-  position: relative;
-  right: 60px;
-}
-
-@media (max-width: 767px) {
-  header .container .icons i {
-    display: none;
-  }
-}
-
-header:hover .icons i,
-header.hoverd .icons i {
-  color: white;
-}
-
-/* header .links {
-  border-top: 2px solid #f6f6f67a;
-  display: flex;
-  justify-content: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #f6f6f67a;
-  margin-left: 0px;
-  padding-left: 30%;
-}
-
-@media (max-width: 500px) {
-  header .links {
-    display: none;
-  }
-}
-
-header .links a {
-  color: white;
-  margin-left: 30px;
-  font-size: 17px;
-  letter-spacing: 2px;
-  transition: 0.5s;
-  font-family: "Abel", sans-serif;
-}
-
-header:hover .links a,
-header.hoverd .links a {
-  color: white;
-}
-
-header .links a:hover {
-  border-bottom: 0.5px solid white;
-} */
-
 .slide-nav {
   position: fixed;
   left: -500px;
@@ -375,7 +322,8 @@ header .links a:hover {
 }
 
 .slide-nav ul li a {
-  color: black
+  color: black;
+  width: 100%;
 }
 
 .slide-nav ul li span:first-child {
@@ -441,23 +389,18 @@ header .links a:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-70%);
-  color: rgb(8, 168, 255);
+  color: rgb(12 12 17);
   font-size: 30px;
   cursor: pointer;
   opacity: 0.4;
-  transition: 0.3s
+  transition: 0.3s;
 }
 
 .navigation-angles i:hover {
   opacity: 1;
-  box-shadow: rgb(8, 168, 255) 5px 5px 6px 1px;
+  box-shadow: rgb(58, 58, 69) 5px 5px 6px 1px;
 }
 
-/* @media (max-width: 767px) {
-  .navigation-angles i {
-    display: none;
-  }
-} */
 .navigation-angles i:first-child {
   right: 30px;
 }
@@ -491,14 +434,14 @@ header .links a:hover {
 
 .images-polits ul li {
   border-radius: 50%;
-  border: rgb(8, 168, 255) 1px solid;
+  border: rgba(0, 0, 0, 0.3) 1px solid;
   height: 15px;
   width: 15px;
   transition: 0.5s ease;
 }
 
 .images-polits ul li.active {
-  background-color: rgb(8, 168, 255);
+  background-color: #f2b863;
 }
 
 /* start managment section */
@@ -629,7 +572,7 @@ header .links a:hover {
 .section-title li {
   border-radius: 15px;
   padding: 10px;
-  transition: .3s;
+  transition: 0.3s;
   cursor: pointer;
   margin-right: 20px;
 }
@@ -645,7 +588,7 @@ header .links a:hover {
 .section-title li a {
   color: #f2b863;
   font-size: 17px;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .section-title li:hover a {
@@ -655,7 +598,6 @@ header .links a:hover {
 .section-title li.active a {
   color: white;
 }
-
 
 .cards {
   display: grid;
@@ -747,7 +689,6 @@ header .links a:hover {
 
 /* end poduct section  */
 
-
 /* start animations */
 @keyframes move-right {
   100% {
@@ -787,7 +728,8 @@ header .links a:hover {
   display: grid;
   width: 100%;
   height: 700px;
-  background-image: linear-gradient(45deg, transparent, black), url(../images/e1.jpg);
+  background-image: linear-gradient(45deg, transparent, black),
+    url(../images/e1.jpg);
   background-size: cover;
   grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
   background-position-x: center;
@@ -843,25 +785,27 @@ body.blur {
   background-image: linear-gradient(45deg, var(--gold-second), transparent);
 }
 
-@media (min-width:1100px) {
+@media (min-width: 1100px) {
   .cards-container .eventCard {
     background-image: none !important;
   }
 
   .cards-container .eventCard div:nth-child(2) {
-    background-image: linear-gradient(225deg, var(--background-color), var(--main));
-
+    background-image: linear-gradient(
+      225deg,
+      var(--background-color),
+      var(--main)
+    );
   }
 }
 
-@media (max-width:1100px) and (min-width:600px) {
+@media (max-width: 1100px) and (min-width: 600px) {
   .decoration-text {
     display: none;
   }
 
   .left-sid-cont {
     background-image: linear-gradient(24deg, #f6dc3b96, #ee82ee96);
-
   }
 
   .Events-cont {
@@ -873,12 +817,15 @@ body.blur {
   }
 
   .cards-container .eventCard div:nth-child(2) {
-    background-image: linear-gradient(225deg, var(--background-color), var(--main));
-
+    background-image: linear-gradient(
+      225deg,
+      var(--background-color),
+      var(--main)
+    );
   }
 }
 
-@media (max-width:600px) and (min-width:450px) {
+@media (max-width: 600px) and (min-width: 450px) {
   .left-sid-cont {
     background-image: linear-gradient(24deg, #f6dc3b96, #ee82ee96);
     height: 90%;
@@ -918,7 +865,11 @@ body.blur {
   }
 
   .eventCard:hover {
-    background-image: linear-gradient(45deg, var(--main), var(--gold-second)) !important;
+    background-image: linear-gradient(
+      45deg,
+      var(--main),
+      var(--gold-second)
+    ) !important;
   }
 
   .eventCard div:nth-child(2) button {
@@ -931,7 +882,7 @@ body.blur {
   }
 }
 
-@media (max-width:450px) {
+@media (max-width: 450px) {
   .eventCard div:nth-child(2) h1 {
     font-size: 20px !important;
     margin: 10px 0 10px !important;
@@ -952,7 +903,6 @@ body.blur {
   .cards-container .eventCard {
     height: 160px !important;
     border-radius: 5px;
-
   }
 
   .eventCard .old-date {
@@ -965,7 +915,6 @@ body.blur {
   .Events-cont {
     height: 1100px;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-
   }
 
   .left-sid-cont {
@@ -978,7 +927,11 @@ body.blur {
   }
 
   .eventCard:hover {
-    background-image: linear-gradient(45deg, var(--main), var(--gold-second)) !important;
+    background-image: linear-gradient(
+      45deg,
+      var(--main),
+      var(--gold-second)
+    ) !important;
   }
 
   .eventCard .old-date .day {
@@ -1008,7 +961,11 @@ body.blur {
   justify-content: center;
   margin: 5px 0;
   min-height: 150px;
-  background-image: linear-gradient(225deg, var(--background-color), var(--main));
+  background-image: linear-gradient(
+    225deg,
+    var(--background-color),
+    var(--main)
+  );
   transition: 1s;
 }
 
@@ -1046,7 +1003,6 @@ body.blur {
   transition: 0.5s;
   color: var(--third);
   background-image: linear-gradient(45deg, violet, var(--gold-second));
-
 }
 
 .eventCard .old-date.clicked {
@@ -1088,7 +1044,6 @@ body.blur {
   color: var(--third);
   margin: 20px 0 10px;
   padding-left: 10px;
-
 }
 
 .eventCard div:nth-child(2) .event-text {
@@ -1116,8 +1071,6 @@ body.blur {
 
 .eventCard div:nth-child(2) button:hover a {
   color: var(--main);
-
-
 }
 
 .eventCard div:nth-child(2) button:hover {
@@ -1177,7 +1130,6 @@ select.select2 {
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
-
 }
 
 .popup {
@@ -1265,7 +1217,7 @@ select.select2 {
 }
 
 .event-image-cont img {
-  width: calc(100%/3 - 7px);
+  width: calc(100% / 3 - 7px);
   margin-bottom: 10px;
 }
 
@@ -1283,17 +1235,17 @@ select.select2 {
   margin-right: 10px;
 }
 
-@media (max-width:1050px) {
+@media (max-width: 1050px) {
   .event-image-cont img:first-child {
     display: none;
   }
 
   .event-image-cont img {
-    width: calc(100%/2 - 5px);
+    width: calc(100% / 2 - 5px);
   }
 }
 
-@media(max-width:700px) {
+@media (max-width: 700px) {
   .event-image-cont img:last-child {
     display: none;
   }
@@ -1312,16 +1264,16 @@ select.select2 {
   background-color: white;
 }
 
-.discount>div {
+.discount > div {
   flex-basis: 50%;
 }
 
-@media(max-width:991px) {
+@media (max-width: 991px) {
   .discount {
     flex-direction: column;
   }
 
-  .discount>div:nth-of-type(2) {
+  .discount > div:nth-of-type(2) {
     margin-top: 20px;
   }
 }
@@ -1334,21 +1286,20 @@ select.select2 {
   text-align: center;
   padding: 100px 0;
   color: white;
-
 }
 
 .discount .discount-text::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: rgb(23 135 224 / 97%);
+  background-color: rgb(141 118 79 / 97%);
 }
 
 .discount .discount-text .content {
-  position: relative
+  position: relative;
 }
 
 .discount .discount-text h2 {
@@ -1411,16 +1362,18 @@ select.select2 {
   outline: none;
 }
 
-.discount .discount-form form input[type="submit"] {
-  background-color: #2196f3;
+.discount .discount-form form #submit-button {
+  background-color: rgb(141 118 79 / 97%);
   color: white;
-  font-weight: bold;
-  font-size: 22px;
+  font-size: 20px;
   transition: 0.3s;
+  height: 40px;
+  border: none;
+  cursor: pointer;
 }
 
-.discount .discount-form form input[type="submit"]:hover {
-  background-color: #1787e0
+.discount .discount-form form #submit-button:hover {
+  background-color: rgba(141, 118, 79, 0.6);
 }
 
 /* end discount */
@@ -1444,14 +1397,14 @@ footer .container .col-1 {
   justify-content: center;
 }
 
-@media(max-width:991px) {
+@media (max-width: 991px) {
   footer .container .col-1 {
     align-items: center;
   }
 }
 
 footer .container .col-1 h1 img {
-  width: 200px
+  width: 200px;
 }
 
 footer .container .col-1 .social-icons {
@@ -1468,24 +1421,24 @@ footer .container .col-1 .social-icons i {
   height: 50px;
   font-size: 20px;
   transition: 0.3s;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
 footer .container .col-1 .social-icons a:first-child i:hover {
-  background-color: #1877F2
+  background-color: #1877f2;
 }
 
 footer .container .col-1 .social-icons a:nth-of-type(2) i:hover {
-  background-color: #1DA1F2;
+  background-color: #1da1f2;
 }
 
 footer .container .col-1 .social-icons a:last-of-type i:hover {
-  background-color: #CD201F;
+  background-color: #cd201f;
 }
 
 footer .container .col-1 p {
   line-height: 2;
-  color: #9b9b9b
+  color: #9b9b9b;
 }
 
 footer .container .col-2 a {
@@ -1493,7 +1446,7 @@ footer .container .col-2 a {
   color: #b9b9b9;
   padding: 15px;
   position: relative;
-  transition: 0.3s
+  transition: 0.3s;
 }
 
 footer .container .col-2 a:hover {
@@ -1501,7 +1454,7 @@ footer .container .col-2 a:hover {
 }
 
 footer .container .col-2 a:not(:last-child) {
-  border-bottom: 1px solid #444
+  border-bottom: 1px solid #444;
 }
 
 footer .container .col-2 a::before {
@@ -1509,8 +1462,7 @@ footer .container .col-2 a::before {
   content: "\F101";
   font-weight: 900;
   margin-right: 10px;
-  color: #2196f3;
-  ;
+  color: rgb(255 211 137);
   transition: 0.3s;
 }
 
@@ -1528,18 +1480,18 @@ footer .col-3 .text {
 
 footer .col-3 .text i {
   font-size: 25px;
-  color: #2196f3;
+  color: rgb(255 211 137);
   margin-right: 10px;
 }
 
 footer .col-3 .text span {
   line-height: 2;
-  color: #b9b9b9
+  color: #b9b9b9;
 }
 
 footer .col-4 img {
   width: 78px;
-  border: 3px solid white
+  border: 3px solid white;
 }
 
 footer p.copyrights {
@@ -1547,13 +1499,12 @@ footer p.copyrights {
   padding: 20px;
   text-align: center;
   color: white;
-  border-top: 1px solid #444
+  border-top: 1px solid #444;
 }
 
 footer p.copyrights span {
-  color: #2196f3;
-  ;
-  font-weight: bold
+  color: rgb(255 211 137);
+  font-weight: bold;
 }
 
 /* End footer  */

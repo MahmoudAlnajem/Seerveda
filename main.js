@@ -4,13 +4,13 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 import {
   getFirestore,
   doc,
   onSnapshot,
-  updateDoc
+  updateDoc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 // ***************************************************************
@@ -22,7 +22,7 @@ const firebaseConfig = {
   projectId: "seerveda-a2eaf",
   storageBucket: "seerveda-a2eaf.firebasestorage.app",
   messagingSenderId: "463117461118",
-  appId: "1:463117461118:web:c955dd73fca0da09ba1a2f"
+  appId: "1:463117461118:web:c955dd73fca0da09ba1a2f",
   // measurementId is optional, no need for it now
 };
 
@@ -45,7 +45,7 @@ const textareas = {
   management: document.getElementById("management-json"),
   products: document.getElementById("products-json"),
   oldEvents: document.getElementById("oldEvents-json"),
-  newEvents: document.getElementById("newEvents-json")
+  newEvents: document.getElementById("newEvents-json"),
 };
 
 let unsubscribe; // To store the onSnapshot listener
@@ -58,10 +58,10 @@ loginButton.addEventListener("click", () => {
   loginError.textContent = ""; // Clear previous errors
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
+    .then((userCredential) => {
       // Signed in successfully
     })
-    .catch(error => {
+    .catch((error) => {
       loginError.textContent =
         "Failed to login. Please check your email and password.";
       console.error("Login error:", error);
@@ -69,13 +69,13 @@ loginButton.addEventListener("click", () => {
 });
 
 logoutButton.addEventListener("click", () => {
-  signOut(auth).catch(error => {
+  signOut(auth).catch((error) => {
     console.error("Logout error:", error);
     showToast("Logout failed.", "error");
   });
 });
 
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in
     loginSection.classList.add("hidden");
@@ -99,7 +99,7 @@ function loadAndDisplayData() {
   // onSnapshot listens for real-time updates
   unsubscribe = onSnapshot(
     docRef,
-    doc => {
+    (doc) => {
       loadingState.classList.add("hidden");
       contentSections.classList.remove("hidden");
 
@@ -117,14 +117,14 @@ function loadAndDisplayData() {
         showToast("Could not load document.", "error");
       }
     },
-    error => {
+    (error) => {
       console.error("Error fetching document:", error);
       showToast("Error loading data.", "error");
     }
   );
 }
 console.log(unsubscribe);
-window.saveData = async sectionKey => {
+window.saveData = async (sectionKey) => {
   const textarea = textareas[sectionKey];
   let parsedData;
 
@@ -140,7 +140,7 @@ window.saveData = async sectionKey => {
   try {
     // We use updateDoc to only change the specific field
     await updateDoc(docRef, {
-      [sectionKey]: parsedData
+      [sectionKey]: parsedData,
     });
     showToast(`${sectionKey} data saved successfully!`, "success");
   } catch (error) {
@@ -153,9 +153,9 @@ window.saveData = async sectionKey => {
 
 function showToast(message, type = "success") {
   toast.textContent = message;
-  toast.className = `toast show ${type === "error"
-    ? "bg-red-500"
-    : "bg-green-500"}`;
+  toast.className = `toast show ${
+    type === "error" ? "bg-red-500" : "bg-green-500"
+  }`;
   setTimeout(() => {
     toast.className = toast.className.replace("show", "");
   }, 3000);
@@ -171,7 +171,7 @@ function loadAndDisplayDataForUser() {
 
   let newdata = onSnapshot(
     docRef,
-    doc => {
+    (doc) => {
       if (doc.exists()) {
         data = doc.data();
         console.log(data);
@@ -296,7 +296,7 @@ function loadAndDisplayDataForUser() {
           typesArr = new Set(typesArr);
 
           function generateSelectOps() {
-            typesArr.forEach(el => {
+            typesArr.forEach((el) => {
               let selectOption = document.createElement("option");
 
               selectOption.textContent = el;
@@ -402,14 +402,14 @@ function loadAndDisplayDataForUser() {
           ".product-card-filter"
         );
 
-        productLis.forEach(li => {
+        productLis.forEach((li) => {
           li.addEventListener("click", () => {
-            productLis.forEach(el => {
+            productLis.forEach((el) => {
               el.classList.remove("active");
             });
             li.classList.add("active");
 
-            cards.forEach(card => {
+            cards.forEach((card) => {
               card.style.display = "none";
             });
 
@@ -419,7 +419,7 @@ function loadAndDisplayDataForUser() {
 
             document
               .querySelectorAll(li.dataset.cat)
-              .forEach(e => (e.style.display = "block"));
+              .forEach((e) => (e.style.display = "block"));
           });
         });
 
@@ -430,17 +430,17 @@ function loadAndDisplayDataForUser() {
         selectOps.addEventListener("change", () => {
           let op = selectOps.value;
 
-          productLis.forEach(el => {
+          productLis.forEach((el) => {
             el.classList.remove("active");
           });
 
           productLis[2].classList.add("active");
 
-          cards.forEach(card => {
+          cards.forEach((card) => {
             card.style.display = "none";
           });
 
-          document.querySelectorAll(`.${op}`).forEach(e => {
+          document.querySelectorAll(`.${op}`).forEach((e) => {
             e.style.display = "block";
           });
         });
@@ -475,7 +475,7 @@ function loadAndDisplayDataForUser() {
         /*functions */
         let resetClick = () => {
           let card = document.querySelectorAll(".cards-container .eventCard");
-          Array.from(card).forEach(ele => {
+          Array.from(card).forEach((ele) => {
             ele.children[0].classList.contains("clicked")
               ? ele.children[0].classList.remove("clicked")
               : ele;
@@ -495,13 +495,13 @@ function loadAndDisplayDataForUser() {
             if (viewBort === -320 * Math.floor(arr.length / 3.1) - 320) {
               viewBort = 0;
               let usedStyle = `translateY(${viewBort}%)`;
-              Array.from(Allcards).forEach(ele => {
+              Array.from(Allcards).forEach((ele) => {
                 ele.style.transform = usedStyle;
               });
             }
 
             let usedStyle = `translateY(${viewBort}%)`;
-            Array.from(Allcards).forEach(ele => {
+            Array.from(Allcards).forEach((ele) => {
               ele.style.transform = usedStyle;
             });
           });
@@ -512,7 +512,7 @@ function loadAndDisplayDataForUser() {
             if (viewBort === 0) {
               viewBort = -320 * Math.floor(arr.length / 3.1);
               let usedStyle = `translateY(${viewBort}%)`;
-              Array.from(Allcards).forEach(ele => {
+              Array.from(Allcards).forEach((ele) => {
                 ele.style.transform = usedStyle;
               });
             } else {
@@ -520,14 +520,14 @@ function loadAndDisplayDataForUser() {
             }
             let usedStyle = `translateY(${viewBort}%)`;
 
-            Array.from(Allcards).forEach(ele => {
+            Array.from(Allcards).forEach((ele) => {
               ele.style.transform = usedStyle;
             });
           });
         };
         /*control center end */
         /*card maker start */
-        let makeCard = arr => {
+        let makeCard = (arr) => {
           document.querySelector(".cards-container .small-cont").remove();
           let evenTcontDiv = document.createElement("div");
           evenTcontDiv.classList.add("small-cont");
@@ -596,7 +596,7 @@ function loadAndDisplayDataForUser() {
         /*select maker start */
         let select = document.createElement("select");
         let select2 = document.createElement("select");
-        let selectAndButtonMaker = arr => {
+        let selectAndButtonMaker = (arr) => {
           select.name = "Speizelation";
           select.classList.add("select");
           select.setAttribute("id", "select1");
@@ -616,7 +616,7 @@ function loadAndDisplayDataForUser() {
         };
         /*select maker end */
         /*option maker */
-        let spezOptionMaker = set => {
+        let spezOptionMaker = (set) => {
           let selectQuer = document.querySelector("select.select");
           for (let i = 0; i < set.size; i++) {
             let optionCont = document.createElement("option");
@@ -625,7 +625,7 @@ function loadAndDisplayDataForUser() {
             selectQuer.append(optionCont);
           }
         };
-        let yearOptionMaker = set => {
+        let yearOptionMaker = (set) => {
           let selectQuer = document.querySelector("select.select2");
           for (let i = 0; i < set.size; i++) {
             let optionCont = document.createElement("option");
@@ -635,7 +635,7 @@ function loadAndDisplayDataForUser() {
           }
         };
         /*spezilation start */
-        let generatSpeiz = arr => {
+        let generatSpeiz = (arr) => {
           selectAndButtonMaker(arr);
           let arrOfYear = ["all"];
           let arrOfSpez = ["all"];
@@ -657,7 +657,7 @@ function loadAndDisplayDataForUser() {
         /*spezlation end */
 
         /*generate filterd option */
-        let generateFilterd = arr => {
+        let generateFilterd = (arr) => {
           let typeCond = document.querySelector(".select").value;
           let yearCond = document.querySelector(".select2").value;
           let filterdArr = [];
@@ -801,7 +801,7 @@ function loadAndDisplayDataForUser() {
         console.log("No such document!");
       }
     },
-    error => {
+    (error) => {
       console.error("Error fetching document:", error);
     }
   );
@@ -833,7 +833,7 @@ BurgerLinks.addEventListener("click", () => {
   }
 });
 
-document.querySelectorAll("section").forEach(sec => {
+document.querySelectorAll("section").forEach((sec) => {
   sec.addEventListener("click", () => {
     slideNav.style.left = "-1000px";
 
@@ -883,7 +883,7 @@ function set() {
 
 set();
 
-nextbutton.onclick = function() {
+nextbutton.onclick = function () {
   clearInterval(first);
   current++;
   if (current === imagesArr.length) {
@@ -897,7 +897,7 @@ nextbutton.onclick = function() {
   set();
 };
 
-prevbutton.onclick = function() {
+prevbutton.onclick = function () {
   clearInterval(first);
   current--;
   if (current < 0) {
@@ -913,11 +913,11 @@ prevbutton.onclick = function() {
 // ***********************************
 
 function removeAll() {
-  imagesArr.forEach(img => {
+  imagesArr.forEach((img) => {
     img.classList.remove("active");
   });
 
-  bulletsArr.forEach(p => {
+  bulletsArr.forEach((p) => {
     p.classList.remove("active");
   });
 }
