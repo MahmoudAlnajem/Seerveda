@@ -17,41 +17,50 @@ import {
 // TODO: Add your Firebase project's configuration here
 // Find this in your Firebase project settings
 const firebaseConfig = {
-  apiKey: "AIzaSyADOLi_nKkE2TVfIQOnbIdSG252K-_OafE",
-  authDomain: "seerveda-a2eaf.firebaseapp.com",
-  projectId: "seerveda-a2eaf",
-  storageBucket: "seerveda-a2eaf.firebasestorage.app",
-  messagingSenderId: "463117461118",
-  appId: "1:463117461118:web:c955dd73fca0da09ba1a2f"
-  // measurementId is optional, no need for it now
+  apiKey: "AIzaSyCqacb7HxQX3Ij4HtYKmeYOwvDm6WfKqnA",
+  authDomain: "seerveda-f2d42.firebaseapp.com",
+  projectId: "seerveda-f2d42",
+  storageBucket: "seerveda-f2d42.firebasestorage.app",
+  messagingSenderId: "403504239464",
+  appId: "1:403504239464:web:6d57480fdd60820fcc3cdd",
+  measurementId: "G-JP26CC7Z45"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const loginSection = document.getElementById("login-section");
+const loginSection = document.querySelector(".login-card");
 const adminPanel = document.getElementById("admin-panel");
 const loginButton = document.getElementById("login-button");
 const logoutButton = document.getElementById("logout-button");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const loginError = document.getElementById("login-error");
-const loadingState = document.getElementById("loading-state");
 const contentSections = document.getElementById("content-sections");
 const toast = document.getElementById("toast");
-
+const overlayBackground = document.querySelector(".overlay");
 const textareas = {
   management: document.getElementById("management-json"),
   products: document.getElementById("products-json"),
   oldEvents: document.getElementById("oldEvents-json"),
-  newEvents: document.getElementById("newEvents-json")
+  newEvents: document.getElementById("newEvents-json"),
+  footer: document.getElementById("Footer-json")
 };
 
 let unsubscribe; // To store the onSnapshot listener
-
+let removeOverLay = () => {
+  loginSection.classList.add("hidden");
+  overlayBackground.classList.add("hidden");
+  document.body.classList.remove("no-scroll");
+};
+//website versions
+let webVersion = "user";
+//to change the HTML element created to be for admin
+let contType = "div";
+let contType2 = "img";
+let contType3 = "input";
 // --- Authentication Logic ---
-
 loginButton.addEventListener("click", () => {
   const email = emailInput.value;
   const password = passwordInput.value;
@@ -60,19 +69,25 @@ loginButton.addEventListener("click", () => {
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in successfully
+      showToast("login sucessed, welcome sir", "sucess");
+      webVersion = "admine";
     })
     .catch(error => {
-      loginError.textContent =
-        "Failed to login. Please check your email and password.";
+      showToast("Login failed. Please check your password and email.", "error");
       console.error("Login error:", error);
     });
 });
 
 logoutButton.addEventListener("click", () => {
-  signOut(auth).catch(error => {
-    console.error("Logout error:", error);
-    showToast("Logout failed.", "error");
-  });
+  signOut(auth)
+    .then(() => {
+      // This forces the browser to refresh the current page so the admin see the changes
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error("Logout error:", error);
+      showToast("Logout failed.", "error");
+    });
 });
 
 onAuthStateChanged(auth, user => {
@@ -81,17 +96,26 @@ onAuthStateChanged(auth, user => {
     loginSection.classList.add("hidden");
     adminPanel.classList.remove("hidden");
     loadAndDisplayData();
+    removeOverLay();
+    contType = "input";
+    contType2 = "input";
   } else {
     // User is signed out
-    loginSection.classList.remove("hidden");
+    //loginSection.classList.remove("hidden");
     adminPanel.classList.add("hidden");
+    contType = "div";
+    contType2 = "img";
     if (unsubscribe) {
       unsubscribe(); // Stop listening to data changes when logged out
     }
   }
 });
 
-// --- Firestore Data Logic ---
+let productsData = [];
+let mangementData = [];
+let eventData = [];
+let newEventData = [];
+
 let data;
 function loadAndDisplayData() {
   const docRef = doc(db, "websiteContent", "main");
@@ -100,17 +124,29 @@ function loadAndDisplayData() {
   unsubscribe = onSnapshot(
     docRef,
     doc => {
-      loadingState.classList.add("hidden");
       contentSections.classList.remove("hidden");
 
       if (doc.exists()) {
         data = doc.data();
 
-        // Using JSON.stringify with indentation for readability
-        textareas.management.value = JSON.stringify(data.management, null, 2);
-        textareas.products.value = JSON.stringify(data.products, null, 2);
-        textareas.oldEvents.value = JSON.stringify(data.oldEvents, null, 2);
-        textareas.newEvents.value = JSON.stringify(data.newEvents, null, 2);
+        // Assign to comp.js arrays
+        productsData = data.products || [];
+        mangementData = data.management || [];
+        eventData = data.oldEvents || [];
+        newEventData = data.newEvents || [];
+
+        // Populate footer textarea
+        const footerTextarea = document.getElementById("Footer-json");
+        if (footerTextarea) {
+          footerTextarea.value = JSON.stringify(data.footer, null, 2);
+        }
+
+        // Render the comp.js UI
+        renderProducts();
+        renderManagement();
+        renderEvents();
+        renderNewEvents();
+
         return data;
       } else {
         console.log("No such document!");
@@ -123,24 +159,42 @@ function loadAndDisplayData() {
     }
   );
 }
+//logging out on refresh
+window.addEventListener("DOMContentLoaded", user => {
+  if (user) {
+    signOut(auth);
+  }
+});
+//
 console.log(unsubscribe);
 window.saveData = async sectionKey => {
-  const textarea = textareas[sectionKey];
-  let parsedData;
-
-  try {
-    parsedData = JSON.parse(textarea.value);
-  } catch (error) {
-    console.error("Invalid JSON:", error);
-    showToast(`Error: Invalid JSON format in ${sectionKey}.`, "error");
+  let dataToSave;
+  if (sectionKey === "products") {
+    dataToSave = productsData;
+  } else if (sectionKey === "management") {
+    dataToSave = mangementData;
+  } else if (sectionKey === "oldEvents") {
+    dataToSave = eventData;
+  } else if (sectionKey === "newEvents") {
+    dataToSave = newEventData;
+  } else if (sectionKey === "footer") {
+    const footerTextarea = document.getElementById("Footer-json");
+    try {
+      dataToSave = JSON.parse(footerTextarea.value);
+    } catch (error) {
+      console.error("Invalid JSON:", error);
+      showToast(`Error: Invalid JSON format in footer.`, "error");
+      return;
+    }
+  } else {
+    showToast(`Unknown section: ${sectionKey}`, "error");
     return;
   }
 
   const docRef = doc(db, "websiteContent", "main");
   try {
-    // We use updateDoc to only change the specific field
     await updateDoc(docRef, {
-      [sectionKey]: parsedData
+      [sectionKey]: dataToSave
     });
     showToast(`${sectionKey} data saved successfully!`, "success");
   } catch (error) {
@@ -149,15 +203,468 @@ window.saveData = async sectionKey => {
   }
 };
 
+// --- Comp.js merged code, for making the admin daahsboard more usable ---
+
+let addProductForm = document.querySelector(".addProductForm");
+
+//selecting the buttons for adding or changing the current conditions
+const conditionsButton = document.querySelector(".submitConditionButton");
+const conditionAddingForm = document.querySelector(".conditionAddingForm");
+const formContainer = document.querySelector(".forms-container");
+
+const closeForm = form => {
+  if (!form) return;
+  form.classList.add("hidden");
+  formContainer.classList.add("hidden");
+  if (typeof form.reset === "function") {
+    form.reset();
+  }
+  if (form === addProductForm) {
+    saveButton.classList.add("hidden");
+    editSaveButton.classList.add("hidden");
+  }
+};
+
+formContainer.addEventListener("click", event => {
+  if (event.target.matches(".cancelFormButton")) {
+    const form = event.target.closest("form");
+    closeForm(form);
+  }
+});
+
+const saveProductData = (saveType, editedProductId) => {
+  console.log(saveType, editedProductId);
+  let productTitle = document.querySelector(".productTitle").value;
+  let productType = document.querySelector(".productType").value;
+  let productImage = document.querySelector(".productImage").value;
+  let productDesc = document.querySelector(".productDescription").value;
+  let productLongDesc = document.querySelector(".productLongDescription").value;
+  let productMainImage = document.querySelector(".productMainImage").value;
+  let newProductFilter = document.querySelector(".newProduct").checked;
+  if (saveType === "add") {
+    let product = {
+      title: productTitle,
+      prodImage: productMainImage,
+      longDesc: productLongDesc,
+      des: productDesc,
+      type: productType,
+      new: newProductFilter,
+      image: productImage,
+      conditions: [],
+      id: productsData.length + 1
+    };
+    productsData = [...productsData, product];
+    renderProducts();
+  } else if (saveType === "edit") {
+    addProductForm.classList.add("hidden");
+    productsData = productsData.map(product => {
+      if (product.id == editedProductId) {
+        return {
+          ...product,
+          title: productTitle || product.title,
+          prodImage: productMainImage || product.image,
+          longDesc: productLongDesc || product.longDesc,
+          des: productDesc || product.des,
+          type: productType || product.type,
+          new: newProductFilter || product.new,
+          image: productImage || product.image,
+          conditions: product.conditions,
+          id: product.id
+        };
+      }
+      return product;
+    });
+    console.log(productsData);
+    renderProducts();
+  }
+};
+
+const saveButton = document.querySelector(".submitProductButton");
+saveButton.addEventListener("click", () => {
+  saveProductData("add");
+  productAddingForm.classList.add("hidden");
+  editSaveButton.classList.add("hidden");
+  formContainer.classList.add("hidden");
+});
+//Adding a product
+//selecting the existing buttons that adds a button, it is not ID based
+const openFormButton = document.querySelector(".addProductButton");
+const productAddingForm = document.querySelector(".addProductForm");
+openFormButton.addEventListener("click", () => {
+  productAddingForm.classList.remove("hidden");
+  saveButton.classList.remove("hidden");
+  formContainer.classList.remove("hidden");
+});
+const editSaveButton = document.querySelector(".editProductButton");
+editSaveButton.addEventListener("click", () => {
+  saveProductData("edit", editSaveButton.getAttribute("data-edit-id"));
+  productAddingForm.classList.add("hidden");
+  formContainer.classList.add("hidden");
+});
+const submitConditionButton = document.querySelector(".submitConditionButton");
+submitConditionButton.addEventListener("click", () => {
+  let condName = document.querySelector(".condName").value;
+  let conditionDesc = document.querySelector(".conditionDesc").value;
+  let conditionDate = document.querySelector(".date").value;
+  let conditionImages = document.querySelectorAll(".conditionImage");
+  let imagesArray = [];
+  conditionImages.forEach(imageInput => {
+    imageInput.value
+      ? imagesArray.push(imageInput.value)
+      : console.log("no image");
+  });
+  let productId = submitConditionButton.getAttribute("data-product-id");
+  let product = productsData.find(p => p.id == productId);
+  let newCondition = {
+    condName: condName,
+    conditionDesc: conditionDesc,
+    date: conditionDate,
+    images: imagesArray
+  };
+  product.conditions.push(newCondition);
+  conditionAddingForm.classList.add("hidden");
+  console.log(productsData);
+  renderProducts();
+});
+const fullView = document.querySelector(".fullView");
+const managementForm = document.querySelector(".addMangementMember");
+const managementSection = document.createElement("div");
+const managementTitle = document.createElement("h2");
+const addMemberButton = document.createElement("button");
+const managementList = document.createElement("ul");
+
+managementSection.classList.add("management-section");
+managementTitle.textContent = "Members";
+addMemberButton.type = "button";
+addMemberButton.textContent = "Add Member";
+managementList.classList.add("management-list");
+
+managementSection.appendChild(managementTitle);
+managementSection.appendChild(addMemberButton);
+managementSection.appendChild(managementList);
+document.getElementById("members-page").appendChild(managementSection);
+
+const renderManagement = () => {
+  managementList.innerHTML = "";
+  mangementData.forEach(member => {
+    const memberItem = document.createElement("li");
+    memberItem.textContent = member.name;
+    const deleteMemberButton = document.createElement("button");
+    deleteMemberButton.type = "button";
+    deleteMemberButton.textContent = "Delete";
+    deleteMemberButton.setAttribute("data-member-name", member.name);
+    deleteMemberButton.addEventListener("click", () => {
+      const memberName = deleteMemberButton.getAttribute("data-member-name");
+      mangementData = mangementData.filter(m => m.name !== memberName);
+      renderManagement();
+    });
+    memberItem.appendChild(deleteMemberButton);
+    managementList.appendChild(memberItem);
+  });
+};
+
+addMemberButton.addEventListener("click", () => {
+  managementForm.classList.remove("hidden");
+  formContainer.classList.remove("hidden");
+});
+
+const saveMemberButton = managementForm.querySelector(".saveMemberButton");
+saveMemberButton.addEventListener("click", () => {
+  const memberName = managementForm.querySelector(".memberName").value.trim();
+  const memberEmail = managementForm.querySelector(".memberEmail").value.trim();
+  const memberPhone = managementForm.querySelector(".memberPhone").value.trim();
+  const memberTitle = managementForm.querySelector(".memberTitle").value.trim();
+  const memberImage = managementForm.querySelector(".memberImage").value.trim();
+  const memberText = managementForm.querySelector(".memberText").value.trim();
+
+  if (!memberName) return;
+
+  const newMember = {
+    name: memberName,
+    email: memberEmail,
+    phone: memberPhone,
+    title: memberTitle,
+    image: memberImage,
+    text: memberText
+  };
+
+  mangementData = [...mangementData, newMember];
+  managementForm.classList.add("hidden");
+  formContainer.classList.add("hidden");
+  managementForm.reset();
+  renderManagement();
+});
+
+renderManagement();
+
+const eventForm = document.querySelector(".addEventForm");
+const eventSection = document.createElement("div");
+const eventTitle = document.createElement("h2");
+const addEventButton = document.createElement("button");
+const eventList = document.createElement("ul");
+
+eventSection.classList.add("event-section");
+eventTitle.textContent = "Events";
+addEventButton.type = "button";
+addEventButton.textContent = "Add Event";
+eventList.classList.add("event-list");
+
+eventSection.appendChild(eventTitle);
+eventSection.appendChild(addEventButton);
+eventSection.appendChild(eventList);
+document.getElementById("events-page").appendChild(eventSection);
+
+eventForm.innerHTML = `
+  <label for="eventTitle">Title</label>
+  <input type="text" id="eventTitle" class="eventTitle" placeholder="Event Title">
+  <label for="eventDesc">Description</label>
+  <textarea id="eventDesc" class="eventDesc" placeholder="Event Description"></textarea>
+  <label for="eventDate">Date</label>
+  <input type="text" id="eventDate" class="eventDate" placeholder="Event Date">
+  <label for="eventShortDesc">Short Description</label>
+  <input type="text" id="eventShortDesc" class="eventShortDesc" placeholder="Short Description">
+  <label for="eventYear">Year</label>
+  <input type="text" id="eventYear" class="eventYear" placeholder="Year">
+  <label for="eventSpez">Specialization</label>
+  <input type="text" id="eventSpez" class="eventSpez" placeholder="Specialization">
+  <label for="eventLink">Link</label>
+  <input type="text" id="eventLink" class="eventLink" placeholder="Link">
+  <button type="button" class="saveEventButton">Save New Event</button>
+  <button type="button" class="cancelFormButton">Back</button>
+`;
+eventForm.classList.add("hidden");
+
+const renderEvents = () => {
+  eventList.innerHTML = "";
+  eventData.forEach(event => {
+    const eventItem = document.createElement("li");
+    eventItem.innerHTML = `<strong>${event.title}</strong> - ${event.desc} - ${event.date}`;
+    const deleteEventButton = document.createElement("button");
+    deleteEventButton.type = "button";
+    deleteEventButton.textContent = "Delete";
+    deleteEventButton.setAttribute("data-event-title", event.title);
+    deleteEventButton.addEventListener("click", () => {
+      const eventTitle = deleteEventButton.getAttribute("data-event-title");
+      eventData = eventData.filter(e => e.title !== eventTitle);
+      renderEvents();
+    });
+    eventItem.appendChild(deleteEventButton);
+    eventList.appendChild(eventItem);
+  });
+};
+
+addEventButton.addEventListener("click", () => {
+  eventForm.classList.remove("hidden");
+  formContainer.classList.remove("hidden");
+});
+
+const saveEventButton = eventForm.querySelector(".saveEventButton");
+saveEventButton.addEventListener("click", () => {
+  const eventTitle = eventForm.querySelector(".eventTitle").value.trim();
+  const eventDesc = eventForm.querySelector(".eventDesc").value.trim();
+  const eventDate = eventForm.querySelector(".eventDate").value.trim();
+  const eventShortDesc = eventForm
+    .querySelector(".eventShortDesc")
+    .value.trim();
+  const eventYear = eventForm.querySelector(".eventYear").value.trim();
+  const eventSpez = eventForm.querySelector(".eventSpez").value.trim();
+  const eventLink = eventForm.querySelector(".eventLink").value.trim();
+
+  if (!eventTitle) return;
+
+  const newEvent = {
+    title: eventTitle,
+    desc: eventDesc,
+    date: eventDate,
+    "short-desc": eventShortDesc,
+    year: eventYear,
+    spez: eventSpez,
+    link: eventLink
+  };
+
+  eventData = [...eventData, newEvent];
+  eventForm.classList.add("hidden");
+  formContainer.classList.add("hidden");
+  eventForm.reset();
+  renderEvents();
+});
+
+renderEvents();
+
+const newEventForm = document.querySelector(".addNewEventForm");
+const newEventSection = document.createElement("div");
+const newEventTitle = document.createElement("h2");
+const addNewEventButton = document.createElement("button");
+const newEventList = document.createElement("ul");
+
+newEventSection.classList.add("new-event-section");
+newEventTitle.textContent = "New Events";
+addNewEventButton.type = "button";
+addNewEventButton.textContent = "Add New Event";
+newEventList.classList.add("new-event-list");
+
+newEventSection.appendChild(newEventTitle);
+newEventSection.appendChild(addNewEventButton);
+newEventSection.appendChild(newEventList);
+document.getElementById("new-events-page").appendChild(newEventSection);
+
+newEventForm.innerHTML = `
+  <label for="newEventImg1">Image 1 URL</label>
+  <input type="text" id="newEventImg1" class="newEventImg1" placeholder="Image 1 URL">
+  <label for="newEventImg2">Image 2 URL</label>
+  <input type="text" id="newEventImg2" class="newEventImg2" placeholder="Image 2 URL">
+  <button type="button" class="saveNewEventButton">Save New Event</button>
+  <button type="button" class="cancelFormButton">Back</button>
+`;
+newEventForm.classList.add("hidden");
+
+const renderNewEvents = () => {
+  newEventList.innerHTML = "";
+  newEventData.forEach((event, index) => {
+    const eventItem = document.createElement("li");
+    eventItem.innerHTML = `<img src="${event.img1}" alt="Img1" style="width:50px;"> <img src="${event.img2}" alt="Img2" style="width:50px;">`;
+    const deleteNewEventButton = document.createElement("button");
+    deleteNewEventButton.type = "button";
+    deleteNewEventButton.textContent = "Delete";
+    deleteNewEventButton.setAttribute("data-index", index);
+    deleteNewEventButton.addEventListener("click", () => {
+      const idx = parseInt(deleteNewEventButton.getAttribute("data-index"));
+      newEventData = newEventData.filter((_, i) => i !== idx);
+      renderNewEvents();
+    });
+    eventItem.appendChild(deleteNewEventButton);
+    newEventList.appendChild(eventItem);
+  });
+};
+
+addNewEventButton.addEventListener("click", () => {
+  newEventForm.classList.remove("hidden");
+  formContainer.classList.remove("hidden");
+});
+
+const saveNewEventButton = newEventForm.querySelector(".saveNewEventButton");
+saveNewEventButton.addEventListener("click", () => {
+  const img1 = newEventForm.querySelector(".newEventImg1").value.trim();
+  const img2 = newEventForm.querySelector(".newEventImg2").value.trim();
+
+  if (!img1 || !img2) return;
+
+  const newEvent = {
+    img1: img1,
+    img2: img2
+  };
+
+  newEventData = [...newEventData, newEvent];
+  newEventForm.classList.add("hidden");
+  formContainer.classList.add("hidden");
+  newEventForm.reset();
+  renderNewEvents();
+});
+
+renderNewEvents();
+
+// Navigation
+const navButtons = document.querySelectorAll(".nav-btn");
+const pages = document.querySelectorAll(".page");
+
+navButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    // Remove active class from all buttons and pages
+    navButtons.forEach(btn => btn.classList.remove("active"));
+    pages.forEach(page => page.classList.remove("active"));
+
+    // Add active class to clicked button and corresponding page
+    button.classList.add("active");
+    const pageId = button.getAttribute("data-page") + "-page";
+    document.getElementById(pageId).classList.add("active");
+  });
+});
+
+const renderProducts = () => {
+  fullView.innerHTML = ""; // Clear existing content
+  productsData.forEach(item => {
+    const compCard = document.createElement("div");
+    compCard.classList.add("compCard");
+
+    const compTitle = document.createElement("h2");
+    compTitle.textContent = item.title;
+    const conditionsList = document.createElement("ul");
+    conditionsList.style.display = "none"; // Hidden by default
+    item.conditions.forEach(condition => {
+      const conditionItem = document.createElement("li");
+      conditionItem.textContent = condition.condName;
+      const deleteConditionButton = document.createElement("button");
+      deleteConditionButton.textContent = "Delete Condition";
+      deleteConditionButton.setAttribute("data-cond-name", condition.condName);
+      deleteConditionButton.setAttribute(
+        "data-product-id",
+        item.id ? item.id : 1
+      );
+      deleteConditionButton.addEventListener("click", () => {
+        const condName = deleteConditionButton.getAttribute("data-cond-name");
+        const productId = deleteConditionButton.getAttribute("data-product-id");
+        const product = productsData.find(p => p.id == productId);
+        if (product) {
+          product.conditions = product.conditions.filter(
+            c => c.condName !== condName
+          );
+          renderProducts();
+        }
+      });
+      conditionItem.appendChild(deleteConditionButton);
+      conditionsList.appendChild(conditionItem);
+    });
+    const showConditionsButton = document.createElement("button");
+    showConditionsButton.textContent = "Show Conditions";
+    showConditionsButton.addEventListener("click", () => {
+      conditionsList.style.display =
+        conditionsList.style.display === "none" ? "block" : "none";
+    });
+    const editProductButton = document.createElement("button");
+    editProductButton.textContent = "Edit Product";
+    editProductButton.id = item.id;
+    editProductButton.addEventListener("click", () => {
+      productAddingForm.classList.remove("hidden");
+      editSaveButton.classList.remove("hidden");
+      saveButton.classList.add("hidden");
+      formContainer.classList.remove("hidden");
+      editSaveButton.setAttribute("data-edit-id", editProductButton.id);
+    });
+    const deleteProductButton = document.createElement("button");
+    deleteProductButton.textContent = "Delete Product";
+    deleteProductButton.addEventListener("click", () => {
+      productsData = productsData.filter(product => product.id != item.id);
+      renderProducts();
+    });
+    const conditionsButton = document.createElement("button");
+    conditionsButton.textContent = "add condition";
+    conditionsButton.setAttribute("data-product-id", item.id);
+    conditionsButton.addEventListener("click", () => {
+      conditionAddingForm.classList.remove("hidden");
+      formContainer.classList.remove("hidden");
+      submitConditionButton.setAttribute("data-product-id", item.id);
+    });
+    compCard.appendChild(conditionsButton);
+    compCard.appendChild(showConditionsButton);
+    compCard.appendChild(deleteProductButton);
+    compCard.appendChild(editProductButton);
+
+    compCard.appendChild(conditionsList);
+    compCard.appendChild(compTitle);
+    fullView.appendChild(compCard);
+  });
+};
+
+renderProducts();
+
 // --- Utility Functions ---
 
 function showToast(message, type = "success") {
   toast.textContent = message;
-  toast.className = `toast show ${type === "error"
-    ? "bg-red-500"
-    : "bg-green-500"}`;
+  toast.classList.remove("hidden");
+  toast.classList.add(`${type === "error" ? "failure-toast" : "sucess-toast"}`);
   setTimeout(() => {
-    toast.className = toast.className.replace("show", "");
+    toast.className = "hidden";
   }, 3000);
 }
 //
@@ -282,19 +789,33 @@ function loadAndDisplayDataForUser() {
 
         let cards = [];
 
-        async function generateproductsCardsDependsOnRespnse() {
+        async function generateproductsCardsDependsOnRespnse(
+          contType,
+          contType2
+        ) {
           let response = data.products;
           console.log(response);
           // start making the select options dynamic
 
           let typesArr = [];
           let val;
+          let type;
           for (val of response) {
-            typesArr.push(val.type);
+            if (val.type.includes(",")) {
+              console.log(val.type);
+              val.type.split(",").forEach(el => {
+                if (!typesArr.includes(el)) {
+                  typesArr.push(el);
+                }
+              });
+            } else {
+              if (!typesArr.includes(val.type)) {
+                typesArr.push(val.type);
+              }
+            }
           }
 
-          typesArr = new Set(typesArr);
-
+          console.log(typesArr);
           function generateSelectOps() {
             typesArr.forEach(el => {
               let selectOption = document.createElement("option");
@@ -310,7 +831,6 @@ function loadAndDisplayDataForUser() {
           generateSelectOps();
 
           // Finish making the select options dynamic
-
           for (val of response) {
             let cardsConatiner = document.querySelector(".cards");
 
@@ -319,9 +839,14 @@ function loadAndDisplayDataForUser() {
             card.classList.add("product-card");
 
             card.classList.add("all");
-
-            card.classList.add(val.type);
-
+            console.log(val);
+            if (val.type.includes(",")) {
+              val.type.split(",").forEach(el => {
+                card.classList.add(el.trim());
+              });
+            } else {
+              card.classList.add(val.type.trim());
+            }
             // start product image
 
             let productImagecon = document.createElement("div");
@@ -330,7 +855,7 @@ function loadAndDisplayDataForUser() {
 
             card.appendChild(productImagecon);
 
-            let productImage = document.createElement("img");
+            let productImage = document.createElement(contType2);
 
             productImage.setAttribute("src", val.image);
 
@@ -344,7 +869,7 @@ function loadAndDisplayDataForUser() {
 
             card.appendChild(productName);
 
-            let productNameText = document.createElement("h3");
+            let productNameText = document.createElement(contType);
 
             productNameText.innerHTML = val.title;
 
@@ -352,7 +877,7 @@ function loadAndDisplayDataForUser() {
 
             // start product text
 
-            let productDes = document.createElement("div");
+            let productDes = document.createElement(contType);
 
             productDes.classList.add("product-text");
 
@@ -365,6 +890,10 @@ function loadAndDisplayDataForUser() {
             let viewMoreButton = document.createElement("button");
 
             viewMoreButton.textContent = `VIEW MORE`;
+
+            viewMoreButton.name = val.title;
+
+            viewMoreButton.classList.add("moreButton");
 
             card.appendChild(viewMoreButton);
 
@@ -390,7 +919,7 @@ function loadAndDisplayDataForUser() {
             cards.push(card);
           }
         }
-        generateproductsCardsDependsOnRespnse();
+        generateproductsCardsDependsOnRespnse(contType, contType2);
 
         // start working on products filtr depend on lis
 
@@ -429,7 +958,7 @@ function loadAndDisplayDataForUser() {
 
         selectOps.addEventListener("change", () => {
           let op = selectOps.value;
-
+          console.log(op);
           productLis.forEach(el => {
             el.classList.remove("active");
           });
@@ -444,7 +973,187 @@ function loadAndDisplayDataForUser() {
             e.style.display = "block";
           });
         });
+        //start the view more about products section
+        //selecting elements
+        const moreMainView = document.querySelector(".moreMainView");
+        const moreProductName = document.querySelector(".moreProductName");
+        const moreProductDesc = document.querySelector(".moreProductDesc p");
+        const moreProductImage = document.querySelector(".moreProductDesc img");
+        const outerCond = document.querySelector(".outerCond");
+        const outerCondImages1 = document.querySelectorAll(
+          ".outerCondImages1 img"
+        );
 
+        const outerCondImages2 = document.querySelectorAll(
+          ".outerCondImages2 img"
+        );
+        const goBackButton = document.querySelector(".goBackButton");
+        const allCondMainView = document.querySelector(".allConditionsSection");
+        let outerCondGallery = document.querySelector(".outerCondGallery");
+        let cond;
+        let condImg;
+        let val;
+
+        let choosenProduct;
+        const viewMoreButton = document.querySelectorAll(".moreButton");
+        viewMoreButton.forEach(button => {
+          button.addEventListener("click", () => {
+            hideEveryThingElse([moreMainView]);
+            bringProductData(button.name, button);
+            moreMainView.classList.remove("hidden");
+            moreMainView.style.left = "0";
+            goBackButton.classList.remove("hidden");
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth" // optional
+            });
+          });
+        });
+        let hideEveryThingElse = arrayOfNonHidden => {
+          //hiding everything
+          let everyThing = document.body.children;
+          Array.from(everyThing).forEach(el => {
+            el.classList.contains("hidden") ? "" : el.classList.add("hidden");
+          });
+          //removing the hide of the selected elements
+          arrayOfNonHidden.forEach(el => {
+            el.classList.remove("hidden");
+          });
+          //removing the hidden from main elements
+          document.querySelector("header").classList.remove("hidden");
+          document.querySelector(".slide-nav").classList.remove("hidden");
+          //
+        };
+
+        let bringProductData = (product, button) => {
+          for (val of data.products) {
+            if (val.title === product) {
+              console.log("right");
+              choosenProduct = val;
+              moreProductName.innerText = choosenProduct.title;
+              moreProductDesc.innerText = choosenProduct.longDesc;
+              moreProductImage.src = choosenProduct.prodImage;
+
+              if (choosenProduct.conditions.length >= 2) {
+                for (let i = 0; i < 2; i++) {
+                  let outerCond = document.createElement("div");
+                  outerCond.classList.add("outerCond");
+                  let outerCondName = document.createElement("div");
+                  outerCondName.classList.add("outerCondName1");
+                  outerCondName.innerText =
+                    choosenProduct.conditions[i].condName;
+                  outerCond.appendChild(outerCondName);
+                  outerCondGallery.appendChild(outerCond);
+                  let outerCondImages = document.createElement("div");
+                  outerCondImages.classList.add("outerCondImages1");
+                  for (val of choosenProduct.conditions[i].images) {
+                    let image = document.createElement("img");
+                    image.loading = "lazy";
+                    image.alt = "condImage";
+                    image.src = val;
+                    outerCondImages.appendChild(image);
+                  }
+                  outerCond.appendChild(outerCondImages);
+                  outerCondGallery.appendChild(outerCond);
+                }
+
+                //
+                let viewAllCondButton = document.createElement("button");
+                viewAllCondButton.classList.add("viewMoreCondButton");
+                viewAllCondButton.textContent = "see more conditions";
+                viewAllCondButton.type = "button";
+                outerCondGallery.appendChild(viewAllCondButton);
+                viewAllCondButton.addEventListener("click", () => {
+                  for (val of data.products) {
+                    if (val.title === choosenProduct.title) {
+                      //filling the header of the all conditions section
+                      let conditionsHeader = document.createElement("h1");
+                      conditionsHeader.classList.add("conditions-header");
+                      conditionsHeader.innerText = `All conditions of ${choosenProduct.title}`;
+                      allCondMainView.appendChild(conditionsHeader);
+                      for (cond of choosenProduct.conditions) {
+                        console.log(cond);
+                        let condHolder = document.createElement("div");
+                        condHolder.classList.add("allCond");
+
+                        // adding the condition Name
+                        let condName = cond.condName;
+                        let condNameDateHolder = document.createElement("div");
+                        let condNameHolder = document.createElement("h2");
+                        condNameHolder.classList.add("allCondName");
+                        condNameHolder.innerText = condName;
+                        // adding the condition date
+                        condNameDateHolder.appendChild(condNameHolder);
+                        let condDate = cond.date;
+                        let condDateHolder = document.createElement("div");
+                        condDateHolder.classList.add("allCondDate");
+                        condDateHolder.innerText = condDate;
+                        condNameDateHolder.appendChild(condDateHolder);
+                        //appending
+                        condHolder.appendChild(condNameDateHolder);
+                        // adding the condition images
+                        let condImages = cond.images;
+                        let allCondImagesHolder = document.createElement("div");
+                        allCondImagesHolder.classList.add("allCondImages");
+                        for (condImg of condImages) {
+                          let condImgHolder = document.createElement("img");
+                          condImgHolder.src = condImg;
+                          condImgHolder.loading = "lazy";
+                          condImgHolder.alt = "condition Image";
+                          allCondImagesHolder.appendChild(condImgHolder);
+                        }
+                        condHolder.appendChild(allCondImagesHolder);
+                        // adding condition description
+                        let condDesc = cond.conditionDesc;
+                        let condDescHolder = document.createElement("p");
+                        condDescHolder.classList.add("allCondDesc");
+                        condDescHolder.innerText = condDesc;
+                        condHolder.appendChild(condDescHolder);
+                        allCondMainView.appendChild(condHolder);
+                      }
+                    }
+                  }
+                  allCondMainView.classList.remove("hidden");
+                  moreMainView.classList.add("hidden");
+                });
+                button.classList.contains("hidden")
+                  ? button.classList.remove("hidden")
+                  : "";
+              } else {
+                outerCondImages1.forEach(el => {
+                  el.classList.add("hidden");
+                });
+                outerCondImages2.forEach(el => {
+                  el.classList.add("hidden");
+                });
+              }
+            }
+          }
+        };
+        //the all conditions section
+
+        goBackButton.addEventListener("click", () => {
+          let everyThing = document.body.children;
+          //removing the hide from everything else
+          Array.from(everyThing).forEach(el => {
+            el.classList.contains("hidden")
+              ? el.classList.remove("hidden")
+              : "";
+          });
+          //returning the hidden to the essintal parts again
+          overlayBackground.classList.add("hidden");
+          loginSection.classList.add("hidden");
+          adminPanel.classList.add("hidden");
+          toast.classList.add("hidden");
+          moreMainView.classList.add("hidden");
+          allCondMainView.classList.contains("hidden")
+            ? ""
+            : allCondMainView.classList.add("hidden");
+          allCondMainView.innerHTML =
+            '<button type="button" class="goBackButton">go back</button>';
+          goBackButton.classList.add("hidden");
+          document.querySelector(".outerCondGallery").innerHTML = "";
+        });
         // end product section
         //start old events section
         /*selecting */
@@ -566,7 +1275,6 @@ function loadAndDisplayDataForUser() {
             let eventButton = document.createElement("button");
 
             let buttonAn = document.createElement("a");
-            buttonAn.href = "#desc";
             buttonAn.append(document.createTextNode("show more"));
             eventButton.append(buttonAn);
             /*button click function start*/
@@ -576,6 +1284,10 @@ function loadAndDisplayDataForUser() {
               eventParagraph.innerHTML = arr[eventCounter].desc;
               linkEvent.href = arr[eventCounter].link;
               dateDiv.classList.add("clicked");
+              document.querySelector(".left-sid-cont #desc").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+              });
             });
 
             /*button click function end */
@@ -700,24 +1412,11 @@ function loadAndDisplayDataForUser() {
           select2.addEventListener("change", () => {
             document.querySelector(".cards-container").removeChild(popCont);
           });
-          // let makePopup = (typeCond, yearCond) => {
-          //   let popCont = document.createElement("div");
-          //   popCont.classList.add("popup");
-          //   popCont.innerHTML = `Sorry their is'nt an event for (${typeCond}) in (${yearCond}) try use another filter`;
-          //   document.body.append(popCont);
-          //   document.body.classList.add("blur");
-          //   eventMainCont.classList.add("blur");
-
-          //   setTimeout(() => {
-          //     document.body.removeChild(popCont);
-          //     eventMainCont.classList.remove("blur");
-          //     document.body.classList.remove("blur");
-          //   }, 4000);
         };
         /*make a popup end */
         /*fetch json */
         async function oldEventsSection(data) {
-          let arrFromRe = Array.from(Object.values(data.oldEvents));
+          let arrFromRe = data.oldEvents;
           for (let i = 0; i < arrFromRe.length; i++) {
             smallEventArr.push(arrFromRe[i]);
             if (i === arrFromRe.length - 1) {
@@ -739,23 +1438,20 @@ function loadAndDisplayDataForUser() {
         let buttonCont = document.querySelector(".daysButton");
         async function newEventsSection(data) {
           let newE = data.newEvents;
-          if (Array.from(Object.values(newE)).length > 0) {
+          if (Array.from(newE).length > 0) {
             newEvents.classList.remove("dis");
           } else {
             console.log("no events");
           }
-          buttonMakerCont(
-            Array.from(Object.values(newE)).length,
-            Array.from(Object.values(newE))
-          );
+          buttonMakerCont(Array.from(newE).length, Array.from(newE));
         }
 
         let buttonMaker = (number, img) => {
           let button = document.createElement("button");
           button.append(document.createTextNode(`day ${number + 1}`));
           button.addEventListener("click", () => {
-            image[0].src = img[0];
-            image[1].src = img[1];
+            image[0].src = img.img1;
+            image[1].src = img.img2;
           });
           if (number === 0) {
             button.click();
@@ -861,10 +1557,6 @@ let bulletsArr = document.querySelectorAll(".images-polits ul li");
 
 let current = 0;
 
-let nextbutton = document.querySelector(".navigation-angles i:first-child");
-
-let prevbutton = document.querySelector(".navigation-angles i:last-child");
-
 // ***********************************
 let first;
 
@@ -883,33 +1575,6 @@ function set() {
 
 set();
 
-nextbutton.onclick = function() {
-  clearInterval(first);
-  current++;
-  if (current === imagesArr.length) {
-    current = 0;
-  }
-  removeAll();
-
-  imagesArr[current].classList.add("active");
-  bulletsArr[current].classList.add("active");
-
-  set();
-};
-
-prevbutton.onclick = function() {
-  clearInterval(first);
-  current--;
-  if (current < 0) {
-    current = 0;
-  }
-  removeAll();
-
-  imagesArr[current].classList.add("active");
-  bulletsArr[current].classList.add("active");
-
-  set();
-};
 // ***********************************
 
 function removeAll() {
@@ -925,7 +1590,26 @@ function removeAll() {
 // end image slide
 //admine popup
 let admineButton = document.querySelector(".adminButton");
+let adminClosingButton = document.querySelector(".login-closer");
+
 admineButton.addEventListener("click", () => {
-  loginSection.classList.remove("login-section-disabled");
-  loginSection.classList.add("login-section-active");
+  loginSection.classList.remove("hidden");
+  overlayBackground.classList.remove("hidden");
+  document.body.classList.add("no-scroll");
+  BurgerLinks.classList.remove("clicked");
+  slideNav.style.left = "-1000px";
 });
+
+adminClosingButton.addEventListener("click", () => {
+  removeOverLay();
+});
+
+//admine version of the website
+//this version will just apper for the admin to edit the website content easily
+//it has repeatition of the main website code with textareas, inputs and save buttons
+//do not delete the comments or try to minimize the code
+//
+//
+//
+
+//admin version products
